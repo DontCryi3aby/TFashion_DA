@@ -9,19 +9,12 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
-import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import HomeIcon from "@mui/icons-material/Home";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import GrainIcon from "@mui/icons-material/Grain";
 import {
   Box,
   Button,
   Container,
   Divider,
   Grid,
-  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
@@ -194,7 +187,7 @@ export default function Detail() {
         alert("sản phẩm đã có trong giỏ hàng");
       } else {
         alert("Product added successfully");
-        navigate("/cart");
+        window.location.reload();
       }
     } catch (err) {
       if (!userId) {
@@ -221,36 +214,7 @@ export default function Detail() {
     <Box>
       <Header />
       <Container maxWidth="xl" sx={{ mt: 4 }}>
-        <Box role="presentation" onClick={() => {}}>
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{ display: "flex", alignItems: "center" }}
-              color="inherit"
-              href="/"
-            >
-              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Trang chủ
-            </Link>
-            <Link
-              underline="hover"
-              sx={{ display: "flex", alignItems: "center" }}
-              color="inherit"
-              href="/material-ui/getting-started/installation/"
-            >
-              <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Váy đầm công sở
-            </Link>
-            <Typography
-              sx={{ display: "flex", alignItems: "center" }}
-              color="text.primary"
-            >
-              <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Đầm xoè hoa nhí xanh cam phối cổ nơ cách điệu
-            </Typography>
-          </Breadcrumbs>
-        </Box>
-        <Grid container spacing={2} mt={1}>
+        <Grid container spacing={2}>
           <Grid item xs={5}>
             <Box
               sx={{
@@ -264,114 +228,21 @@ export default function Detail() {
             </Box>
           </Grid>
           <Grid item xs={7}>
-            <Stack
-              component="form"
-              method="POST"
-              onSubmit={save}
-              textAlign="left"
-            >
-              <Typography variant="h4">{detail.product.title}</Typography>
+            <Stack>
+              <Typography variant="h4">Detail H V-Neck Sweater</Typography>
               <Typography sx={{ mt: 2 }} variant="body2">
-                Tình trạng: {detail.tinhtrang}
+                Be the first to review this product
               </Typography>
               <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
                 <Typography variant="h5" sx={{ color: "#eb2323" }}>
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(detail.product.gia * 1000)}
+                  $99.00
                 </Typography>
                 <Typography
                   variant="h5"
                   sx={{ textDecoration: "line-through" }}
                 >
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(detail.product.gia * 1000 + 30000)}
+                  $110.00
                 </Typography>
-              </Box>
-              <Box mt={1}>
-                <div className="size-container">
-                  <span style={{ fontSize: 20 }} className="buttonsize">
-                    Size:
-                  </span>
-                  <button
-                    onClick={() => handleSizeClick("S")}
-                    className={`size-button ${
-                      selectedSize === "S" ? "selected" : ""
-                    }`}
-                    style={{
-                      fontSize: 16,
-                      border: "1px solid gainsboro",
-                      marginLeft: 5,
-                      width: 45,
-                      height: 40,
-                    }}
-                  >
-                    S
-                  </button>
-                  <button
-                    onClick={() => handleSizeClick("M")}
-                    className={`size-button ${
-                      selectedSize === "M" ? "selected" : ""
-                    }`}
-                    style={{
-                      fontSize: 16,
-                      border: "1px solid gainsboro",
-                      marginLeft: 5,
-                      width: 45,
-                      height: 40,
-                    }}
-                  >
-                    M
-                  </button>
-                  <button
-                    onClick={() => handleSizeClick("L")}
-                    className={`size-button ${
-                      selectedSize === "L" ? "selected" : ""
-                    }`}
-                    style={{
-                      fontSize: 16,
-                      border: "1px solid gainsboro",
-                      marginLeft: 5,
-                      width: 45,
-                      height: 40,
-                    }}
-                  >
-                    L
-                  </button>
-                  <button
-                    onClick={() => handleSizeClick("XL")}
-                    className={`size-button ${
-                      selectedSize === "XL" ? "selected" : ""
-                    }`}
-                    style={{
-                      fontSize: 16,
-                      border: "1px solid gainsboro",
-                      marginLeft: 5,
-                      width: 45,
-                      height: 40,
-                    }}
-                  >
-                    XL
-                  </button>
-                  <button
-                    onClick={() => handleSizeClick("XXL")}
-                    className={`size-button ${
-                      selectedSize === "XXL" ? "selected" : ""
-                    }`}
-                    style={{
-                      fontSize: 16,
-                      border: "1px solid gainsboro",
-                      marginLeft: 5,
-                      width: 45,
-                      height: 40,
-                    }}
-                  >
-                    XXL
-                  </button>
-                </div>
               </Box>
               <Typography sx={{ mt: 2 }} variant="body2">
                 Typi non habent claritatem insitam, est usus legentis in iis qui
@@ -395,32 +266,18 @@ export default function Detail() {
               </Typography>
               <Divider sx={{ mt: 2 }} />
               <Box mt={2} sx={{ display: "flex" }}>
-                <Box
+                <Button
                   sx={{
                     border: "1px solid #000",
-                    px: 1,
-                    borderRadius: 1,
-                    display: "flex",
-                    alignItems: "center",
+                    px: 2,
+                    color: "#000",
                   }}
+                  startIcon={<RemoveIcon />}
+                  endIcon={<AddIcon />}
+                  size="large"
                 >
-                  <IconButton onClick={down}>
-                    <RemoveIcon />
-                  </IconButton>
-
-                  <Box
-                    sx={{
-                      color: "#000",
-                      px: 1,
-                    }}
-                    size="large"
-                  >
-                    {slsp}
-                  </Box>
-                  <IconButton onClick={up}>
-                    <AddIcon />
-                  </IconButton>
-                </Box>
+                  1
+                </Button>
 
                 <Button
                   sx={{
@@ -436,7 +293,7 @@ export default function Detail() {
                   }}
                   size="large"
                   startIcon={<AddIcon />}
-                  type="submit"
+                  onClick={() => navigate("/cart")}
                 >
                   Add to cart
                 </Button>
@@ -448,31 +305,33 @@ export default function Detail() {
                       onChange={handleChange}
                       aria-label="lab API tabs example"
                     >
-                      <Tab label="Chi tiết" value="1" />
-                      <Tab label="Thông tin thêm" value="2" />
-                      <Tab label="Đánh giá" value="3" />
+                      <Tab label="Details" value="1" />
+                      <Tab label="More Information" value="2" />
+                      <Tab label="Reviews" value="3" />
                     </TabList>
                   </Box>
                   <TabPanel value="1">
-                    <Typography align="left">
-                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Miễn phí vận chuyển với đơn hàng có giá trị trên 599K
-                    </Typography>
-                    <Typography align="left">
-                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Giao hàng toàn quốc từ 2-4 ngày làm việc
-                    </Typography>
-                    <Typography align="left">
-                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Đổi trả sản phẩm trong 7 ngày, từ ngày nhận được sản phẩm
-                    </Typography>
-                    <Typography align="left">
-                      <PhoneAndroidOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Hotline & Zalo hỗ trợ KH: 0705768103
-                    </Typography>
+                    Designed by Hans J. Wegner in 1949 as one of the first
+                    models created especially for Carl Hansen & Son, and
+                    produced since 1950. The last of a series of chairs Wegner
+                    designed based on inspiration from antique Chinese
+                    armchairs. The gently rounded top together with the back and
+                    seat offers a variety of comfortable seating positions,
+                    ideal for both long visits to the dining table and relaxed
+                    lounging. A light chair, easy to move around the dining
+                    table and about the room. The characteristic "Y" provides
+                    comfortable back support and stability to the steam-bent
+                    top, also inspiring the chair's names An excellent example
+                    of Wegner's constant striving towards organic simplicity to
+                    create sculptural beauty, comfort and outstanding stability.
+                    The gently rounded top together with the back and seat
+                    offers a variety of comfortable seating positions, ideal for
+                    both long visits to the dining table and relaxed lounging. A
+                    light chair, easy to move around the dining table and about
+                    the room.
                   </TabPanel>
-                  <TabPanel value="2">Nội dung thêm đang cập nhật...</TabPanel>
-                  <TabPanel value="3">Chưa có đánh giá...</TabPanel>
+                  <TabPanel value="2">More Information</TabPanel>
+                  <TabPanel value="3">Review Content</TabPanel>
                 </TabContext>
               </Box>
             </Stack>
@@ -480,6 +339,290 @@ export default function Detail() {
         </Grid>
         <div>
           <div className="container">
+            <p className="kasflak">
+              <Link>Trang chủ</Link>/ <Link>Váy đầm công sở</Link>/{" "}
+              <Link>Đầm xoè hoa nhí xanh cam phối cổ nơ cách điệu</Link>
+            </p>
+            <div className="titlechung">
+              <hr></hr>
+              <div className="left">
+                <h4>SẢN PHẨM MỚI</h4>
+                <div className="nd1">
+                  <div className="nd1fake">
+                    <img
+                      src="https://cdn.pancake.vn/1/s80x80/fwebp/7a/70/b8/8a/fc581b19cedd026409247c32fcbe4a16787110879767e6be804e710c.jpg"
+                      alt=""
+                    />
+                    <div className="thep">
+                      <p>
+                        <Link>Đầm ôm đỏ nơ eo DH2767</Link>
+                      </p>
+                      <p className="price">299.000₫ </p>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+
+                <div className="nd1">
+                  <div className="nd1fake">
+                    <img
+                      src="https://cdn.pancake.vn/1/s80x80/fwebp/c5/9b/4c/34/d89865daf47c1611181a50e8f03ca60c7c8c4f5005c4b164c7cb4723.jpg"
+                      alt=""
+                    />
+                    <div className="thep">
+                      <p>
+                        <Link>Đầm ôm xanh đá nơ eo cổ thuyền</Link>
+                      </p>
+                      <p className="price">299.000₫ </p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div className="nd1">
+                  <div className="nd1fake">
+                    <img
+                      src="https://cdn.pancake.vn/1/s1600x1600/fwebp/7e/4a/aa/9f/c1253fa3c03eed39cc83ea12137228dd429230504431be4e63ce607b.jpg"
+                      alt=""
+                    />
+                    <div className="thep">
+                      <p>
+                        <Link>Đầm xòe hoa phối chân xanh tím than</Link>
+                      </p>
+                      <p className="price">299.000₫ </p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div className="nd1">
+                  <div className="nd1fake">
+                    <img
+                      src="https://cdn.pancake.vn/1/s1600x1600/fwebp/5d/1c/1b/14/01327040d3119133a83b750ff7f3b0d706723343c0a029cae189fd7f.jpg"
+                      alt=""
+                    />
+                    <div className="thep">
+                      <p>
+                        <Link>Đầm hoa xanh sát nách phối cổ vuông</Link>
+                      </p>
+                      <p className="price">299.000₫ </p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div className="nd1">
+                  <div className="nd1fake">
+                    <img
+                      src="https://cdn.pancake.vn/1/s1600x1600/fwebp/e0/2a/e9/3f/2a5a3ccdc309b6752e77a0760fe46f8cdde0866814a64654d8b59c71.jpg"
+                      alt=""
+                    />
+                    <div className="thep">
+                      <p>
+                        <Link>Đầm xoè hồng cổ tròn phối nơ</Link>
+                      </p>
+                      <p className="price">299.000₫ </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="center">
+                <img
+                  className="img-fluid"
+                  src={`${process.env.REACT_APP_BASEURL}/upload/${detail.product.hinhanh}`}
+                  alt=""
+                />
+              </div>
+
+              <div className="right">
+                <form onSubmit={save}>
+                  <h2 name="detailtitle">{detail.product.title}</h2>
+                  <span className="tinhtrang">
+                    Tình trạng: {detail.tinhtrang}
+                  </span>
+
+                  <div className="price-container">
+                    <span
+                      name=""
+                      style={{
+                        fontSize: 21,
+                        color: "red",
+                        marginTop: 0,
+                        fontWeight: 500,
+                      }}
+                      className="price"
+                    >
+                      giá: {detail.product.gia} đ
+                    </span>
+                    <br></br>
+
+                    <div className="size-container">
+                      <b style={{ fontSize: 20 }} className="buttonsize">
+                        Size:
+                      </b>
+                      <button
+                        onClick={() => handleSizeClick("S")}
+                        className={`size-button ${
+                          selectedSize === "S" ? "selected" : ""
+                        }`}
+                        style={{
+                          fontSize: 16,
+                          border: "1px solid gainsboro",
+                          marginLeft: 5,
+                          width: 45,
+                          height: 40,
+                        }}
+                      >
+                        S
+                      </button>
+                      <button
+                        onClick={() => handleSizeClick("M")}
+                        className={`size-button ${
+                          selectedSize === "M" ? "selected" : ""
+                        }`}
+                        style={{
+                          fontSize: 16,
+                          border: "1px solid gainsboro",
+                          marginLeft: 5,
+                          width: 45,
+                          height: 40,
+                        }}
+                      >
+                        M
+                      </button>
+                      <button
+                        onClick={() => handleSizeClick("L")}
+                        className={`size-button ${
+                          selectedSize === "L" ? "selected" : ""
+                        }`}
+                        style={{
+                          fontSize: 16,
+                          border: "1px solid gainsboro",
+                          marginLeft: 5,
+                          width: 45,
+                          height: 40,
+                        }}
+                      >
+                        L
+                      </button>
+                      <button
+                        onClick={() => handleSizeClick("XL")}
+                        className={`size-button ${
+                          selectedSize === "XL" ? "selected" : ""
+                        }`}
+                        style={{
+                          fontSize: 16,
+                          border: "1px solid gainsboro",
+                          marginLeft: 5,
+                          width: 45,
+                          height: 40,
+                        }}
+                      >
+                        XL
+                      </button>
+                      <button
+                        onClick={() => handleSizeClick("XXL")}
+                        className={`size-button ${
+                          selectedSize === "XXL" ? "selected" : ""
+                        }`}
+                        style={{
+                          fontSize: 16,
+                          border: "1px solid gainsboro",
+                          marginLeft: 5,
+                          width: 45,
+                          height: 40,
+                        }}
+                      >
+                        XXL
+                      </button>
+                    </div>
+
+                    <div className="quantity-container">
+                      <b className="quantity">
+                        <button
+                          onClick={down}
+                          style={{
+                            fontSize: 20,
+                            width: 20,
+                            height: 40,
+                            textAlign: "center",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background: "#f9f9f9",
+                            border: "1px solid gray",
+                          }}
+                        >
+                          -
+                        </button>
+                        <input
+                          style={{
+                            width: 50,
+                            height: 40,
+                            fontSize: 20,
+                            alignItems: "center",
+                            textAlign: "center",
+                            border: "1px solid gray",
+                          }}
+                          type="text"
+                          value={slsp}
+                        />
+                        <button
+                          onClick={up}
+                          style={{
+                            fontSize: 20,
+                            width: 20,
+                            height: 40,
+                            textAlign: "center",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background: "#f9f9f9",
+                            border: "1px solid gray",
+                          }}
+                        >
+                          +
+                        </button>
+                      </b>
+                      <button
+                        style={{
+                          border: "1px solid #dd9c3f",
+                          fontWeight: 500,
+                          color: "white",
+                          width: 210,
+                          height: 40,
+                          borderRadius: 35,
+                          fontSize: 20,
+                          background: "#dd9c3f",
+                        }}
+                      >
+                        Thêm vào giỏ hàng
+                      </button>
+                    </div>
+                    <div style={{ float: "left" }}>
+                      <p style={{ fontSize: 19, float: "left" }}>
+                        thông tin sản phẩm:{" "}
+                      </p>
+                      <p style={{ fontSize: 19, float: "left" }}>
+                        <TiMinus />
+                        Miễn phí vận chuyển với đơn hàng có giá trị trên 599K
+                        <br></br>
+                        <TiMinus />
+                        Giao hàng toàn quốc từ 2-4 ngày làm việc<br></br>
+                        <TiMinus />
+                        Đổi trả sản phẩm trong 7 ngày, từ ngày nhận được sản
+                        phẩm<br></br>
+                        <TiMinus />
+                        Hotline & Zalo hỗ trợ KH: 0984196426
+                      </p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <br></br>
             <div className="motasp">
               <div className="tieude">
                 <p

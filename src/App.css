@@ -37,21 +37,18 @@
   }
 }
 
-
-body{
-  margin:0;
+body {
+  margin: 0;
   padding: 0;
- 
 }
 #containerheader {
   height: 60px;
- 
 }
 
 ul #dc2 {
   position: absolute;
   float: left;
-  
+
   margin-top: 15px;
   display: none;
   background-color: #fff;
@@ -64,8 +61,7 @@ ul #dc2 {
 
 ul #dc2 li {
   margin-bottom: 5px;
-  float:left;
-   
+  float: left;
 }
 
 ul #dc2 a {
@@ -90,7 +86,7 @@ ul #dc2 a:hover {
 #header li a {
   text-decoration: none;
   list-style: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   box-sizing: border-box;
   font-size: 16px;
@@ -123,7 +119,7 @@ a {
 
 ul #dc1 {
   position: absolute;
-  float:left;
+  float: left;
 
   margin-top: 15px;
   display: none;
@@ -137,7 +133,7 @@ ul #dc1 {
 
 ul #dc1 li {
   margin-bottom: 5px;
-  float:left;
+  float: left;
   width: 160px;
 }
 
@@ -149,16 +145,13 @@ ul #dc1 a:hover {
   color: #ff7f50;
 }
 
-
-
 .nd {
   display: flex;
- justify-content: center;
- align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 110px;
   background-color: #f1f1f1;
   margin-top: 30px;
-  
 }
 .nd h3 {
   font-weight: 600;
@@ -166,17 +159,17 @@ ul #dc1 a:hover {
   font-size: 16px;
   margin-bottom: 0;
 }
-.icon{
-font-size: 40px;
-color: brown;
+.icon {
+  font-size: 40px;
+  color: brown;
 }
 .nd1 {
-width:290px;
+  width: 290px;
 
-display: flex;
+  display: flex;
 }
 
-.nd2{
+.nd2 {
   margin-top: 25px;
   align-items: center;
   text-align: center;
@@ -188,42 +181,29 @@ display: flex;
 }
 
 .vay {
- 
-
   text-align: center;
- 
+
   margin-top: 20px;
- 
- 
-  width:100%;
-  
-  
+
+  width: 100%;
 }
 
 .vay1 img {
-  
   width: 285px;
-  height:450px;
+  height: 450px;
 }
-.vay1{
-
+.vay1 {
   display: inline-block;
- 
 
   width: 285px;
 
   padding-left: 15px;
-
-
 }
 .ahoandz {
   width: 285px;
 
   position: absolute;
-  
 }
-
-
 
 .ykien {
   width: 100%;
@@ -294,19 +274,19 @@ display: flex;
 .right {
   font-size: 45px;
 }
-.thegioiphaidep{
+.thegioiphaidep {
   margin-top: 25px;
   background-color: rgb(225, 222, 222);
 }
-.tgpd{
+.tgpd {
   margin-top: 15px;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
- padding-top: 20px;
+  font-family: "Roboto", sans-serif;
+  padding-top: 20px;
   color: #000;
   cursor: pointer;
- font-size: 25px;
- font-weight: 600;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .tgpd1 {
@@ -314,40 +294,36 @@ display: flex;
   padding-top: 20px;
 }
 
-.eqeqr{
+.eqeqr {
   color: rgb(64, 62, 62);
 }
 
-.slide{
+.slide {
   width: 250px;
   height: 380px;
   background-color: aliceblue;
-  margin:0 auto;
+  margin: 0 auto;
   padding-left: 15px;
-
 }
-.slidechung{
-overflow-x: scroll;
+.slidechung {
+  overflow-x: scroll;
   display: flex;
   width: 100%;
   margin: 0 auto;
-
-
 }
 #login-register {
   position: absolute;
   margin-top: 7px;
   top: 10px;
   right: 10px;
-  
+
   width: 200px;
 }
 #login-register ul {
-   float: left;
-   justify-content: center;
-   text-align: center;
-   display: flex;
-   
+  float: left;
+  justify-content: center;
+  text-align: center;
+  display: flex;
 }
 
 #login-register ul li {
@@ -369,8 +345,7 @@ overflow-x: scroll;
   border-radius: 3px;
 }
 
-
-.slidefake{
+.slidefake {
   width: 235px;
   height: 365px;
 
@@ -378,7 +353,7 @@ overflow-x: scroll;
 
   margin-top: 10px;
 }
-.slidefake img{
+.slidefake img {
   width: 235px;
 }
 .slidefake h5 {
@@ -394,20 +369,17 @@ overflow-x: scroll;
   margin-bottom: 0;
 }
 
-
 .tgpd2 {
-text-align: center;
-align-items: center;
-width: 100%;
-height: 100%;
-
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
-.slidechung h6{
-  float:left;
+.slidechung h6 {
+  float: left;
 }
 
-.yasuo{
-  
+.yasuo {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -419,167 +391,143 @@ height: 100%;
   color: black;
   font-size: 14px;
 }
-.kasflak{
-  float:left;
+.kasflak {
+  float: left;
 }
 
-.left{
+.left {
   width: 23%;
- border-radius: 15px;
-  height:615px;
+  border-radius: 15px;
+  height: 615px;
   border: 1px solid gainsboro;
 }
-.center{
+.center {
   width: 38%;
- margin-left: 15px;
-  height:100%;
+  margin-left: 15px;
+  height: 100%;
 }
-.right{
+.right {
   width: 33%;
-margin-left: 20px;
-  height:100%;
-
- 
- 
+  margin-left: 20px;
+  height: 100%;
 }
-
 
 .titlechung {
-  width:100%;
+  width: 100%;
   display: flex;
 }
 
-.left h4{
+.left h4 {
   margin-top: 15px;
 }
-.nd1 img{
+.nd1 img {
   width: 70px;
   height: 65px;
   object-fit: cover;
   border-radius: 100%;
-
 }
 
-.nd1 p{
+.nd1 p {
   box-sizing: border-box;
   font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .nd1 {
   width: 100%;
   height: 85px;
   display: flex;
- 
+
   padding-left: 5px;
- 
 }
-.thep{
-height:55px;
-
-
-
+.thep {
+  height: 55px;
 }
 
-
-.thep p{
+.thep p {
   text-align: center;
-justify-content: center;
-align-items: center;
-
+  justify-content: center;
+  align-items: center;
 }
 
-.price{
+.price {
   margin-top: -15px;
   float: left;
 }
 
-
-.nd1fake{
+.nd1fake {
   text-align: center;
   justify-content: center;
   align-items: center;
-  display: flex;  height:85px;
-  
-
+  display: flex;
+  height: 85px;
 }
 
-.tinhtrang{
+.tinhtrang {
   box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    line-height: 1.5;
-    color: #212529;
-    float: left;
-    width:280px;
-    
-    
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #212529;
+  float: left;
+  width: 280px;
 }
 
-.quantity input{
+.quantity input {
   width: 150px;
 }
 
-.size-container{
+.size-container {
   width: 100%;
   display: flex;
   float: left;
   align-items: center;
- 
-
 }
 
-.tieude{
+.tieude {
   border-radius: 20px;
-  
 }
 
-.quantity{
- float:left;
+.quantity {
+  float: left;
 }
 
 .motasp {
-   
-   width:100%;
+  width: 100%;
   float: left;
 }
-.chitietsp{
+.chitietsp {
   width: 400px;
- float: left;
+  float: left;
 }
 
-.chitietsp p{
-  float:left;
+.chitietsp p {
+  float: left;
   font-size: 1rem;
-    font-weight: 400;
+  font-weight: 400;
 }
 
-.chitietsp h2{
-  float:left;
+.chitietsp h2 {
+  float: left;
 }
 
-
-
-.splq h5{
-    float:left;
+.splq h5 {
+  float: left;
 }
 
-
-
-
-.thegioiphaidep{
+.thegioiphaidep {
   margin-top: 25px;
   background-color: rgb(225, 222, 222);
 }
-.tgpd{
+.tgpd {
   margin-top: 15px;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
- padding-top: 20px;
+  font-family: "Roboto", sans-serif;
+  padding-top: 20px;
   color: #000;
   cursor: pointer;
- font-size: 25px;
- font-weight: 600;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .tgpd1 {
@@ -587,29 +535,27 @@ align-items: center;
   padding-top: 20px;
 }
 
-.eqeqr{
+.eqeqr {
   color: rgb(64, 62, 62);
 }
 
-.slide{
+.slide {
   width: 250px;
   height: 380px;
   background-color: aliceblue;
-  margin:0 auto;
+  margin: 0 auto;
   padding-left: 15px;
-
 }
 
-.slidecc{
+.slidecc {
   margin-left: 30px;
 }
 
-.slidechung{
-overflow-x: scroll;
+.slidechung {
+  overflow-x: scroll;
   display: flex;
   width: 100%;
   margin: 0 auto;
-
 }
 
 .slidechung::-webkit-scrollbar {
@@ -627,8 +573,7 @@ overflow-x: scroll;
   border-radius: 3px;
 }
 
-
-.slidefake{
+.slidefake {
   width: 235px;
   height: 365px;
 
@@ -636,7 +581,7 @@ overflow-x: scroll;
 
   margin-top: 10px;
 }
-.slidefake img{
+.slidefake img {
   width: 235px;
 }
 .slidefake h5 {
@@ -652,20 +597,17 @@ overflow-x: scroll;
   margin-bottom: 0;
 }
 
-
 .tgpd2 {
-text-align: center;
-align-items: center;
-width: 100%;
-height: 100%;
-
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
-.slidechung h6{
-  float:left;
+.slidechung h6 {
+  float: left;
 }
 
-.yasuo{
-  
+.yasuo {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -692,8 +634,6 @@ height: 100%;
   background-color: red; /* Màu nền cho button được chọn */
   color: white; /* Màu chữ cho button được chọn */
 }
-
-
 
 .list-group-item:hover {
   cursor: pointer; /* Hiển thị icon khi hover vào */
@@ -751,32 +691,30 @@ height: 100%;
   margin: 0 10px;
 }
 
-
-.vaycategory{
+.vaycategory {
   width: 185px;
-  height:370px;
-  float:left;
+  height: 370px;
+  float: left;
 
   margin-left: 15px;
 }
 
-.categoryproduct{
- 
+.categoryproduct {
   margin-top: 20px;
   width: 100%;
-  height:100%;
+  height: 100%;
 }
 
-.vay1category{
+.vay1category {
   float: left;
   overflow: hidden;
 }
-.ahoandzcategory{
+.ahoandzcategory {
   width: 185px;
 
- overflow: hidden;
- text-overflow: ellipsis;
- white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .thanhtoan-container {
@@ -849,7 +787,6 @@ height: 100%;
 .sanpham-title {
   width: 375px;
   font-weight: 550;
-
 }
 
 .tong-title {
@@ -884,7 +821,7 @@ height: 100%;
 }
 
 .giamgia-button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -918,13 +855,10 @@ height: 100%;
   padding: 2px 5px;
   border-radius: 100%;
   position: relative;
-  
- 
 
   display: inline-block;
   transform: translateY(-50%);
 }
-
 
 .login-form {
   max-width: 300px;
@@ -978,9 +912,6 @@ height: 100%;
   background-color: #2c387e;
 }
 
-
-
-
 .tensanphamcheckout {
   width: 100%;
   margin: 10px 0;
@@ -988,24 +919,26 @@ height: 100%;
   flex-direction: column;
 }
 
-
-
-.sotienchek{
+.sotienchek {
   pointer-events: none;
 }
 
 .custom-margin {
-  
- 
   margin-top: -35px;
-  }
+}
 
-  .custom-margin-top {
-    width: 1200px;
-    margin-top: 70px;
-    }
+.custom-margin-top {
+  width: 1200px;
+  margin-top: 70px;
+}
 
-  .custom-margin-top-detail {
-   width: 1200px;
-   margin-top: 70px;
-   }
+.custom-margin-top-detail {
+  width: 1200px;
+  margin-top: 70px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
