@@ -62,7 +62,7 @@ export default function Sominu() {
   return (
     <Box>
       <Header />
-      <Box mt={4}>
+      <Box mt={2}>
         <div
           className="tieudecategory"
           style={{ display: "flex", height: 35, marginLeft: 200 }}

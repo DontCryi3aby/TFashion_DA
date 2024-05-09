@@ -28,10 +28,12 @@ import {
 import Tab from "@mui/material/Tab";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";
+import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import { Footer } from "../components/Footer";
 export default function Detail() {
   const [detailtitle, setdetailtitle] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -65,10 +67,6 @@ export default function Detail() {
   const userData = localStorage.getItem("userData");
   const user = userData ? JSON.parse(userData).user : null;
   const userId = user ? user.id : null;
-
-  const handleLogout = () => {
-    localStorage.removeItem("userData");
-  };
 
   const handleSizeClick = (size) => {
     setSelectedSize(size, () => {
@@ -373,26 +371,77 @@ export default function Detail() {
                   </button>
                 </div>
               </Box>
-              <Typography sx={{ mt: 2 }} variant="body2">
-                Typi non habent claritatem insitam, est usus legentis in iis qui
-                facit eorum claritatem. Investigationes demonstraverunt lectores
-                legere me lius quod ii legunt saepius. Claritas est etiam
-                processus A Capitalize on low hanging fruit to identify a
-                ballpark value added activity to beta test. Override the digital
-                divide with additional clickthroughs from DevOps.
-              </Typography>
-              <Typography sx={{ mt: 1 }} variant="body2">
-                – Light green crewneck sweatshirt.
-              </Typography>
-              <Typography sx={{ mt: 1 }} variant="body2">
-                – Hand pockets.
-              </Typography>
-              <Typography sx={{ mt: 1 }} variant="body2">
-                – Relaxed fit.
-              </Typography>
-              <Typography sx={{ mt: 1 }} variant="body2">
-                SKU Detail H V-Neck Sweater
-              </Typography>
+              <Box mt={2}>
+                <TabContext value={value}>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <TabList
+                      onChange={handleChange}
+                      aria-label="lab API tabs example"
+                    >
+                      <Tab label="Chi tiết" value="1" />
+                      <Tab label="Thông tin thêm" value="2" />
+                      <Tab label="Đánh giá" value="3" />
+                    </TabList>
+                  </Box>
+                  <TabPanel value="1">
+                    <Box>
+                      <Typography>
+                        <b>Chất liệu</b>: {detail.chatlieu}
+                      </Typography>
+                      <Typography>
+                        <b>Thế mạnh sản phẩm</b>: {detail.themanhsp}
+                      </Typography>
+                      <Typography>
+                        <b>Thông số sản phẩm</b>:
+                        <Typography>(Vai)*(Ngực)*(Eo) cm</Typography>
+                        <Box>
+                          <Typography>Size S: 37*85*66</Typography>
+                          <Typography>Size M: 38*88*71</Typography>
+                          <Typography>Size L: 39*92*76</Typography>
+                          <Typography>Size XL: 40*96*80</Typography>
+                          <Typography>Size XXL: 41*100*84</Typography>
+                        </Box>
+                      </Typography>
+                      <Typography>
+                        <b>Thông số người mẫu</b>:
+                        <Box>
+                          <Typography>
+                            Chiều cao: 1m65. Cân nặng: 48kg
+                          </Typography>
+                          <Typography>
+                            Vòng 1: 85. Vòng 2: 61. Vòng 3: 89
+                          </Typography>
+                          <Typography>
+                            <KeyboardDoubleArrowRightOutlinedIcon
+                              sx={{ mr: 1 }}
+                            />
+                            Size: <b>S</b>
+                          </Typography>
+                        </Box>
+                      </Typography>
+                    </Box>
+                  </TabPanel>
+                  <TabPanel value="2">
+                    <Typography align="left">
+                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
+                      Miễn phí vận chuyển với đơn hàng có giá trị trên 599K
+                    </Typography>
+                    <Typography align="left">
+                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
+                      Giao hàng toàn quốc từ 2-4 ngày làm việc
+                    </Typography>
+                    <Typography align="left">
+                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
+                      Đổi trả sản phẩm trong 7 ngày, từ ngày nhận được sản phẩm
+                    </Typography>
+                    <Typography align="left">
+                      <PhoneAndroidOutlinedIcon size="small" sx={{ mr: 1 }} />
+                      Hotline & Zalo hỗ trợ KH: 0705768103
+                    </Typography>
+                  </TabPanel>
+                  <TabPanel value="3">Chưa có đánh giá...</TabPanel>
+                </TabContext>
+              </Box>
               <Divider sx={{ mt: 2 }} />
               <Box mt={2} sx={{ display: "flex" }}>
                 <Box
@@ -441,603 +490,256 @@ export default function Detail() {
                   Add to cart
                 </Button>
               </Box>
-              <Box mt={2}>
-                <TabContext value={value}>
-                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                    <TabList
-                      onChange={handleChange}
-                      aria-label="lab API tabs example"
-                    >
-                      <Tab label="Chi tiết" value="1" />
-                      <Tab label="Thông tin thêm" value="2" />
-                      <Tab label="Đánh giá" value="3" />
-                    </TabList>
-                  </Box>
-                  <TabPanel value="1">
-                    <Typography align="left">
-                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Miễn phí vận chuyển với đơn hàng có giá trị trên 599K
-                    </Typography>
-                    <Typography align="left">
-                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Giao hàng toàn quốc từ 2-4 ngày làm việc
-                    </Typography>
-                    <Typography align="left">
-                      <CheckOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Đổi trả sản phẩm trong 7 ngày, từ ngày nhận được sản phẩm
-                    </Typography>
-                    <Typography align="left">
-                      <PhoneAndroidOutlinedIcon size="small" sx={{ mr: 1 }} />
-                      Hotline & Zalo hỗ trợ KH: 0705768103
-                    </Typography>
-                  </TabPanel>
-                  <TabPanel value="2">Nội dung thêm đang cập nhật...</TabPanel>
-                  <TabPanel value="3">Chưa có đánh giá...</TabPanel>
-                </TabContext>
-              </Box>
             </Stack>
           </Grid>
         </Grid>
         <div>
-          <div className="container">
-            <div className="motasp">
-              <div className="tieude">
-                <p
-                  style={{
-                    fontSize: 16,
-                    textTransform: "uppercase",
-                    fontWeight: 500,
-                    float: "left",
-                  }}
-                >
-                  MÔ TẢ / <span> ĐÁNH GIÁ</span>
+          <div className="splq">
+            <div className="thegioiphaidep">
+              <div className="tgpd1">
+                <span className="tgpd">THẾ GIỚI CỦA PHÁI ĐẸP</span>
+                <p className="eqeqr">
+                  Tổng hợp những kiến thức về thời trang, làm đẹp và những sự
+                  kiện thời trang khác
                 </p>
-                <br></br>
-                <br></br>
-                <div className="chitietsp">
-                  <div className="chitietsp1">
-                    <h2>Chất liệu</h2>
-                    <br />
-                    <br />
-                    <p>
-                      <TiMinus />
-                      {detail.chatlieu}
-                    </p>
-                  </div>
-
-                  <div
-                    id="element-to-toggle"
-                    className={isVisible ? "" : "hidden"}
-                  >
-                    <div className="chitietsp2">
-                      <h2>Thế mạnh sản phẩm</h2>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        {detail.themanhsp}
-                      </p>
-                      <br />
-                      <br />
-                    </div>
-
-                    <div className="chitietsp3">
-                      <h2>Thông số sản phẩm</h2>
-                      <br />
-                      <p>(Vai)*(Ngực)*(Eo) cm</p>
-                      <p>
-                        <TiMinus />
-                        Size S: 37*85*66
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Size M: 38*88*71
-                      </p>
-                      <br />
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Size L: 39*92*76
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Size XL: 40*96*80
-                      </p>
-                      <br />
-                      <br />
-                    </div>
-                    <div className="chitietsp4">
-                      <h2>Thông số người mẫu</h2>
-                      <br />
-
-                      <p>
-                        <TiMinus />
-                        Chiều cao 1m65
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Cân nặng: 48kg
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Vòng 1: 85 cm
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Vòng 2: 61 cm
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Vòng 3: 89 cm
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Mặc size S
-                      </p>
-                      <br />
-                      <br />
-                    </div>
-
-                    <div className="chitietsp5">
-                      <h2>Hướng dẫn giặt là</h2>
-                      <br />
-
-                      <p>
-                        <TiMinus />
-                        Giặt tay hoặc giặt máy ở chế độ giặt nhẹ
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Giặt nước lạnh
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Giặt với sản phẩm cùng màu
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Lộn trái khi giặt
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Không tẩy
-                      </p>
-                      <br />
-                      <p>
-                        <TiMinus />
-                        Phơi trong bóng mát
-                      </p>
-                      <br />
-                    </div>
-                  </div>
-                  <button
-                    style={{
-                      background: "#cc9c69",
-                      float: "left",
-                      border: "1px solid #cc9c69",
-                      borderRadius: 15,
-                      height: 40,
-                    }}
-                    onClick={() => {
-                      setIsVisible(!isVisible);
-                      toggleVisibility();
-                    }}
-                  >
-                    {isVisible ? "Ẩn" : "Hiện"} chi tiết sản phẩm
-                  </button>
-                </div>
               </div>
-            </div>
-
-            <div className="splq">
-              <div className="thegioiphaidep">
-                <div className="tgpd1">
-                  <span className="tgpd">THẾ GIỚI CỦA PHÁI ĐẸP</span>
-                  <p className="eqeqr">
-                    Tổng hợp những kiến thức về thời trang, làm đẹp và những sự
-                    kiện thời trang khác
-                  </p>
-                </div>
-                <div className="tgpd2">
-                  <div className="slidechung">
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/f4/26/6d/06/def0ccf4c96da793fe00085976c3dc5d3cbe366d7415d744d1266284.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/hrctddhmn">
-                            {" "}
-                            HIỂU RÕ CƠ THỂ MÌNH ĐỂ ĐẸP HƠN MỖI NGÀY{" "}
-                          </Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Đừng mãi chỉ chạy theo xu hướng, hiểu rõ cơ thể mình
-                          mới là điều quan trọng nhất để mặc đẹp mỗi ngày. Hy
-                          vọng những chia sẻ của Citi Mode sẽ phần nàng tự tin
-                          hơn trong khoảng lựa chọn trang phục để luôn tỏa sáng
-                          nhất nàng nhé.
-                        </p>
-                        <h6>
-                          <Link to="/hrctddhmn">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
-                    </div>
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/5e/ab/18/df/6416d367b0945924e5f8bcd24547c2e73f41e87a225bf90955fed4da.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/nbvanvddx">
-                            {" "}
-                            NỔI BẬT VÀ ẤN TƯỢNG VỚI ĐẦM DÁNG XÒE !!!
-                          </Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Nếu những thiết kế đầm suông mang đến sự thoải mái,
-                          trẻ trung hay những kiểu dáng bodycon ấn tượng cho vẻ
-                          ngoài cuốn hút thì những thiết kế đầm xòe lại không
-                          làm cho các Quý cô thất vọng với sự nhẹ nhàng và vô
-                          cùng nữ tính.
-                        </p>
-                        <h6>
-                          <Link to="/nbvanvddx">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
-                    </div>
-
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/1a/4b/67/5e/514d87737939c2677f376420463b67867af83ce140ae07511969bcd5.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/cdcvbc">
-                            {" "}
-                            10 cách diện chân váy bút chì thanh lịch
-                          </Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Chân váy bút chì là 1 trong những item kinh điển của
-                          phụ nữ công sở. Item này vừa đơn giản, tôn dáng lại
-                          mang cảm giác thanh lịch, chỉn chu cho người mặc. Phụ
-                          nữ Hàn cũng thường xuyên chọn diện chân váy bút chì
-                          khi đến sở làm. Thậm chí, họ còn biến tấu, mix&match
-                          chân váy bút chì với nhiều item khác biệt để có được
-                          những bộ cánh mới mẻ mỗi ngày.
-                        </p>
-                        <h6>
-                          <Link to="/cdcvbc">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
-                    </div>
-
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/b0/37/62/c3/86831d6accfa0b3b96e0715a687b007403ae0f550d617e91b26cb288.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/sdttt"> SẮC ĐỎ TRONG THỜI TRANG</Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Kể từ thời cổ đại, màu đỏ đại diện cho cuộc sống sung
-                          túc, cho nguồn sức mạnh dồi dào và niềm đam mê cháy
-                          bỏng. Trong thời trang, không ít những món đồ màu đỏ
-                          đã trở thành biểu tượng thương hiệu riêng cũng như đại
-                          diện thương hiệu chung. Trang phục màu đỏ có sức mê
-                          hoặc khó cưỡng, tạo hiệu ứng thị giác mạnh mẽ, là cách
-                          các nàng thể hiện bản lĩnh tự tin và khả năng làm chủ
-                          tình huống.
-                        </p>
-                        <h6>
-                          <Link to="/sdttt">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
-                    </div>
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/51/02/84/b0/b674ce1842630a4d6da83c96fa6397a4dcb6b39f50658312d66aa088.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/cctpsm">
-                            {" "}
-                            Các công thức phối sơ mi + chân váy cả tuần cho nàng
-                            công sở
-                          </Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Trong trường hợp quá lười chọn đồ hoặc bí ý tưởng,
-                          nàng cứ diện một set đồ an toàn mà chuẩn nhất cho chốn
-                          công sở, chính là nguyên set đồ vest. Áo vest đi cùng
-                          chân váy luôn là outfit đạt điểm 10 về độ lịch sự,
-                          mang đậm hơi thở quý cô công sở và gần như không có
-                          điểm trừ. Outfit này chỉ có đôi chút bất tiện nếu diện
-                          trong thời tiết nóng bức. Bởi vì thế nàng hãy ưu tiên
-                          chọn set đồ này cho những ngày khí hậu mát mẻ, đặc
-                          biệt trong những ngày có sự kiện quan trọng như họp
-                          hành, gặp mặt khách hàng để đảm bảo nét thanh lịch,
-                          kín đáo cho chính mình nàng nha!
-                        </p>
-                        <h6>
-                          <Link to="/cctpsm">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
-                    </div>
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/15/63/2d/28/3a1a46e4647e452146fa35e04913214f6f53efc6e382b9958d9f96db.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/dlmj"> ĐI LÀM MẶC GÌ?</Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Thời trang không chỉ là lĩnh vực liên quan đến phạm
-                          trù thẩm mỹ mà ở trong đó còn ẩn chứa những bí mật hết
-                          sức thú vị. Có thể nàng chưa biết, mỗi màu sắc trong
-                          thời trang đều nói lên một tính cách ẩn sâu trong con
-                          người nàng. Và dưới đây là ý nghĩa màu sắc thời trang
-                          và cách phối màu quần áo phù hợp cho mỗi ngày đi làm
-                          nàng nha!
-                        </p>
-                        <h6>
-                          <Link to="/dlmj">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
-                    </div>
-
-                    <div className="slidecc">
-                      <div
-                        className="slidefake"
-                        style={{ transform: `translateX(${-position}px)` }}
-                      >
-                        <img
-                          src="https://statics.pancake.vn/web-media/9c/f3/f1/c4/78ce99cfcdcb73ec53861b00181ab03cc792fe0d34cd255b48067862.png"
-                          alt=""
-                        />
-                        <br></br>
-                        <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
-                        <h5>
-                          <Link to="/vdcscc">
-                            VÁY ĐẦM CÔNG SỞ CAO CẤP: CỰC SANG TRỌNG VÀ TINH TẾ
-                          </Link>{" "}
-                        </h5>
-                        <BsFillPersonFill /> Thời trang hot
-                        <p className="yasuo">
-                          Không xa hoa lộng lẫy, không cần quá nổi bật giữa đám
-                          đông, những mẫu đầm hàng hiệu luôn sở hữu vẻ đẹp lung
-                          linh đến diệu kỳ, khiến chị em không thể nào rời mắt.{" "}
-                        </p>
-                        <h6>
-                          <Link to="/vdcscc">
-                            {" "}
-                            Đọc tiếp <AiOutlineArrowRight />
-                          </Link>
-                        </h6>
-                      </div>
+              <div className="tgpd2">
+                <div className="slidechung">
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/f4/26/6d/06/def0ccf4c96da793fe00085976c3dc5d3cbe366d7415d744d1266284.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/hrctddhmn">
+                          {" "}
+                          HIỂU RÕ CƠ THỂ MÌNH ĐỂ ĐẸP HƠN MỖI NGÀY{" "}
+                        </Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Đừng mãi chỉ chạy theo xu hướng, hiểu rõ cơ thể mình mới
+                        là điều quan trọng nhất để mặc đẹp mỗi ngày. Hy vọng
+                        những chia sẻ của Citi Mode sẽ phần nàng tự tin hơn
+                        trong khoảng lựa chọn trang phục để luôn tỏa sáng nhất
+                        nàng nhé.
+                      </p>
+                      <h6>
+                        <Link to="/hrctddhmn">
+                          {" "}
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  borderRadius: "15px",
-                  background: "#cc9c69",
-                }}
-              >
-                <div class="container-fluid fh5co_footer_bg pb-3">
-                  <div class="container animate-box">
-                    <div class="row">
-                      <div class="col-12 col-md-4 col-lg-3">
-                        <div class="footer_main_title py-3">
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/5e/ab/18/df/6416d367b0945924e5f8bcd24547c2e73f41e87a225bf90955fed4da.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/nbvanvddx">
                           {" "}
-                          Địa chỉ tòa soạn
-                        </div>
-                        <div class="footer_sub_about pb-3">
+                          NỔI BẬT VÀ ẤN TƯỢNG VỚI ĐẦM DÁNG XÒE !!!
+                        </Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Nếu những thiết kế đầm suông mang đến sự thoải mái, trẻ
+                        trung hay những kiểu dáng bodycon ấn tượng cho vẻ ngoài
+                        cuốn hút thì những thiết kế đầm xòe lại không làm cho
+                        các Quý cô thất vọng với sự nhẹ nhàng và vô cùng nữ
+                        tính.
+                      </p>
+                      <h6>
+                        <Link to="/nbvanvddx">
                           {" "}
-                          Trụ sở chính: Số 138A Giảng Võ - Quận Ba Đình - Thành
-                          phố Hà Nội Địa chỉ liên hệ: Tòa nhà Tổng cục Dân số,
-                          ngõ 8 đường Tôn Thất Thuyết, quận Nam Từ Liêm, TP Hà
-                          Nội Điện thoại: 024.3846.1042 - Fax: 024.3844.3144
-                          Đường dây nóng: 0931.965.967 Email:
-                          giadinhnet@suckhoedoisong.vn
-                        </div>
-                        <div class="footer_mediya_icon">
-                          <div class="text-center d-inline-block">
-                            <a class="fh5co_display_table_footer">
-                              <div class="fh5co_verticle_middle">
-                                <i class="fa fa-linkedin"></i>
-                              </div>
-                            </a>
-                          </div>
-                          <div class="text-center d-inline-block">
-                            <a class="fh5co_display_table_footer">
-                              <div class="fh5co_verticle_middle">
-                                <i class="fa fa-google-plus"></i>
-                              </div>
-                            </a>
-                          </div>
-                          <div class="text-center d-inline-block">
-                            <a class="fh5co_display_table_footer">
-                              <div class="fh5co_verticle_middle">
-                                <i class="fa fa-twitter"></i>
-                              </div>
-                            </a>
-                          </div>
-                          <div class="text-center d-inline-block">
-                            <a class="fh5co_display_table_footer">
-                              <div class="fh5co_verticle_middle">
-                                <i class="fa fa-facebook"></i>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12 col-md-3 col-lg-2">
-                        <div class="footer_main_title py-3"> Category</div>
-                        <ul class="footer_menu">
-                          <li>
-                            <a href="{{url('/kinhdoanh')}}">
-                              <i class="fa fa-angle-right"></i> kinh doanh
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/khoahoc')}}">
-                              <i class="fa fa-angle-right"></i> khoa học
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/thoitrang')}}">
-                              <i class="fa fa-angle-right"></i> Thời trang
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/giaoduc')}}">
-                              <i class="fa fa-angle-right"></i> Giáo dục 4.0
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/giaothong')}}">
-                              <i class="fa fa-angle-right"></i> Giao thông
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/laodongvieclam')}}">
-                              <i class="fa fa-angle-right"></i> Lao động việc
-                              làm
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/thegioitunhien')}}">
-                              <i class="fa fa-angle-right"></i> Thế giới tự
-                              nhiên
-                            </a>
-                          </li>
-                          <li>
-                            <a href="{{url('/cacmonthethaokhac')}}">
-                              <i class="fa fa-angle-right"></i> Các môn thể thao
-                              khác
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
-                        <div class="footer_main_title py-3">
-                          {" "}
-                          Liên Hệ Quảng Cáo: ADMICRO
-                        </div>
-                        <div class="footer_makes_sub_font">
-                          Hotline: 0794.46.33.33 - 0961.98.43.88 Email:
-                          giadinh@admicro.vn
-                        </div>
-                        Add: Tầng 20, tòa nhà Center Building, Hapulico Complex,
-                        số 1 Nguyễn Huy Tưởng, phường Thanh Xuân Trung, quận
-                        Thanh Xuân, Hà Nội
-                      </div>
-                      <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
-                        <div class="footer_main_title py-3">
-                          {" "}
-                          CHUYÊN TRANG GIA ĐÌNH VÀ XÃ HỘI - BÁO ĐIỆN TỬ SỨC KHỎE
-                          VÀ ĐỜI SỐNG
-                        </div>
-                        <div class="footer_makes_sub_font">
-                          Cơ quan chủ quản: Bộ Y tế Tổng biên tập: Trần Tuấn
-                          Linh
-                        </div>
-                        Cơ quan chủ quản: Bộ Y tế Tổng biên tập: Trần Tuấn Linh
-                        Hoạt động theo Giấy phép số 60/GP-CBC ngày 23/7/2021 của
-                        Cục Báo chí - Bộ Thông tin và Truyền thông ® Mọi hình
-                        thức sao chép thông tin, hình ảnh phải có sự đồng ý bằng
-                        văn bản. Vui lòng dẫn “giadinh.suckhoedoisong.vn” khi
-                        phát hành lại thông tin từ website này.
-                      </div>
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
                     </div>
-                    <div class="row justify-content-center pt-2 pb-4">
-                      <div class="col-12 col-md-8 col-lg-7 ">
-                        <div class="input-group">
-                          <span
-                            class="input-group-addon fh5co_footer_text_box"
-                            id="basic-addon1"
-                          >
-                            <i class="fa fa-envelope"></i>
-                          </span>
-                        </div>
-                      </div>
+                  </div>
+
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/1a/4b/67/5e/514d87737939c2677f376420463b67867af83ce140ae07511969bcd5.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/cdcvbc">
+                          {" "}
+                          10 cách diện chân váy bút chì thanh lịch
+                        </Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Chân váy bút chì là 1 trong những item kinh điển của phụ
+                        nữ công sở. Item này vừa đơn giản, tôn dáng lại mang cảm
+                        giác thanh lịch, chỉn chu cho người mặc. Phụ nữ Hàn cũng
+                        thường xuyên chọn diện chân váy bút chì khi đến sở làm.
+                        Thậm chí, họ còn biến tấu, mix&match chân váy bút chì
+                        với nhiều item khác biệt để có được những bộ cánh mới mẻ
+                        mỗi ngày.
+                      </p>
+                      <h6>
+                        <Link to="/cdcvbc">
+                          {" "}
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
+                    </div>
+                  </div>
+
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/b0/37/62/c3/86831d6accfa0b3b96e0715a687b007403ae0f550d617e91b26cb288.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/sdttt"> SẮC ĐỎ TRONG THỜI TRANG</Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Kể từ thời cổ đại, màu đỏ đại diện cho cuộc sống sung
+                        túc, cho nguồn sức mạnh dồi dào và niềm đam mê cháy
+                        bỏng. Trong thời trang, không ít những món đồ màu đỏ đã
+                        trở thành biểu tượng thương hiệu riêng cũng như đại diện
+                        thương hiệu chung. Trang phục màu đỏ có sức mê hoặc khó
+                        cưỡng, tạo hiệu ứng thị giác mạnh mẽ, là cách các nàng
+                        thể hiện bản lĩnh tự tin và khả năng làm chủ tình huống.
+                      </p>
+                      <h6>
+                        <Link to="/sdttt">
+                          {" "}
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
+                    </div>
+                  </div>
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/51/02/84/b0/b674ce1842630a4d6da83c96fa6397a4dcb6b39f50658312d66aa088.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/cctpsm">
+                          {" "}
+                          Các công thức phối sơ mi + chân váy cả tuần cho nàng
+                          công sở
+                        </Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Trong trường hợp quá lười chọn đồ hoặc bí ý tưởng, nàng
+                        cứ diện một set đồ an toàn mà chuẩn nhất cho chốn công
+                        sở, chính là nguyên set đồ vest. Áo vest đi cùng chân
+                        váy luôn là outfit đạt điểm 10 về độ lịch sự, mang đậm
+                        hơi thở quý cô công sở và gần như không có điểm trừ.
+                        Outfit này chỉ có đôi chút bất tiện nếu diện trong thời
+                        tiết nóng bức. Bởi vì thế nàng hãy ưu tiên chọn set đồ
+                        này cho những ngày khí hậu mát mẻ, đặc biệt trong những
+                        ngày có sự kiện quan trọng như họp hành, gặp mặt khách
+                        hàng để đảm bảo nét thanh lịch, kín đáo cho chính mình
+                        nàng nha!
+                      </p>
+                      <h6>
+                        <Link to="/cctpsm">
+                          {" "}
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
+                    </div>
+                  </div>
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/15/63/2d/28/3a1a46e4647e452146fa35e04913214f6f53efc6e382b9958d9f96db.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/dlmj"> ĐI LÀM MẶC GÌ?</Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Thời trang không chỉ là lĩnh vực liên quan đến phạm trù
+                        thẩm mỹ mà ở trong đó còn ẩn chứa những bí mật hết sức
+                        thú vị. Có thể nàng chưa biết, mỗi màu sắc trong thời
+                        trang đều nói lên một tính cách ẩn sâu trong con người
+                        nàng. Và dưới đây là ý nghĩa màu sắc thời trang và cách
+                        phối màu quần áo phù hợp cho mỗi ngày đi làm nàng nha!
+                      </p>
+                      <h6>
+                        <Link to="/dlmj">
+                          {" "}
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
+                    </div>
+                  </div>
+
+                  <div className="slidecc">
+                    <div
+                      className="slidefake"
+                      style={{ transform: `translateX(${-position}px)` }}
+                    >
+                      <img
+                        src="https://statics.pancake.vn/web-media/9c/f3/f1/c4/78ce99cfcdcb73ec53861b00181ab03cc792fe0d34cd255b48067862.png"
+                        alt=""
+                      />
+                      <br></br>
+                      <p style={{ background: "brown" }}>23 Tháng 8 2022</p>
+                      <h5>
+                        <Link to="/vdcscc">
+                          VÁY ĐẦM CÔNG SỞ CAO CẤP: CỰC SANG TRỌNG VÀ TINH TẾ
+                        </Link>{" "}
+                      </h5>
+                      <BsFillPersonFill /> Thời trang hot
+                      <p className="yasuo">
+                        Không xa hoa lộng lẫy, không cần quá nổi bật giữa đám
+                        đông, những mẫu đầm hàng hiệu luôn sở hữu vẻ đẹp lung
+                        linh đến diệu kỳ, khiến chị em không thể nào rời mắt.{" "}
+                      </p>
+                      <h6>
+                        <Link to="/vdcscc">
+                          {" "}
+                          Đọc tiếp <AiOutlineArrowRight />
+                        </Link>
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -1046,6 +748,7 @@ export default function Detail() {
           </div>
         </div>
       </Container>
+      <Footer />
     </Box>
   );
 }

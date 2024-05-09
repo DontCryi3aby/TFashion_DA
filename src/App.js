@@ -23,12 +23,8 @@ import Dondathang from "./admin/Dondathang";
 import Thongtinkh from "./admin/Thongtinkh";
 
 import Hrctddhmn from "./giaodien/thegioicuaphaidep/Hrctmddhmn";
-import Cctpsm from "./giaodien/thegioicuaphaidep/Cctpsm";
 import Cdcvbc from "./giaodien/thegioicuaphaidep/Cdcvbc";
-import Dlmj from "./giaodien/thegioicuaphaidep/Dlmj";
 import Nbvanvddx from "./giaodien/thegioicuaphaidep/Nbvanvddx";
-import Sdttt from "./giaodien/thegioicuaphaidep/Sdttt";
-import Vdcscc from "./giaodien/thegioicuaphaidep/Vdcscc";
 import Checkout from "./giaodien/Checkout";
 import Kiemtradon from "./giaodien/Kiemtradon";
 
@@ -55,12 +51,9 @@ function App() {
           <Route path="/category/xahang" element={<Xahang />} />
           <Route path="/checkout" element={<Checkout />} />
 
-          <Route path="/cctpsm" element={<Cctpsm />} />
           <Route path="/cdcvbc" element={<Cdcvbc />} />
-          <Route path="/dlmj" element={<Dlmj />} />
+
           <Route path="/nbvanvddx" element={<Nbvanvddx />} />
-          <Route path="/sdttt" element={<Sdttt />} />
-          <Route path="/vdcscc" element={<Vdcscc />} />
           <Route path="/hrctddhmn" element={<Hrctddhmn />} />
           <Route path="/thongtinkhachhang" element={<Thongtinkh />} />
 

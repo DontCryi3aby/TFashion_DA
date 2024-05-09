@@ -16,30 +16,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import Badge from "@mui/material/Badge";
 import { Settings } from "@mui/icons-material";
-
-const pages = [
-  { label: "Giới thiệu", link: "/about" },
-  { label: "Sản phẩm", link: "/products" },
-  { label: "Liên hệ", link: "/contact" },
-  { label: "Feedback", link: "/feedback" },
-];
-const settings = [
-  {
-    label: "Thông tin cá nhân",
-    link: "#",
-    icon: <PermIdentityOutlinedIcon fontSize="small" />,
-  },
-  { label: "Cài đặt", link: "#", icon: <Settings fontSize="small" /> },
-  {
-    label: "Giỏ hàng",
-    link: "/cart",
-    icon: (
-      <Badge badgeContent={4} color="primary">
-        <ShoppingCartOutlinedIcon fontSize="small" />
-      </Badge>
-    ),
-  },
-];
+import Logo from "./Logo";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -62,16 +39,53 @@ function Header() {
 
   const userData = localStorage.getItem("userData");
   const user = userData ? JSON.parse(userData).user : null;
+  const userId = user ? user.id : null;
 
   const handleLogout = () => {
     localStorage.removeItem("userData");
   };
 
+  const [cartCount, setCartCount] = useState(0);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/api/users/${userId}/slsptgh`)
+      .then((response) => {
+        setCartCount(response.data);
+      })
+      .catch((error) => {
+        console.log(error); // Kiểm tra xem có lỗi xảy ra hay không
+      });
+  }, []);
+
+  const pages = [
+    { label: "Giới thiệu", link: "/about" },
+    { label: "Sản phẩm", link: "/products" },
+    { label: "Liên hệ", link: "/contact" },
+    { label: "Feedback", link: "/feedback" },
+  ];
+  const settings = [
+    {
+      label: "Thông tin cá nhân",
+      link: "#",
+      icon: <PermIdentityOutlinedIcon fontSize="small" />,
+    },
+    { label: "Cài đặt", link: "#", icon: <Settings fontSize="small" /> },
+    {
+      label: "Giỏ hàng",
+      link: "/cart",
+      icon: (
+        <Badge badgeContent={cartCount} color="primary">
+          <ShoppingCartOutlinedIcon fontSize="small" />
+        </Badge>
+      ),
+    },
+  ];
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-          <Box>LOGO</Box>
+          <Logo />
           <Box
             sx={{
               display: "flex",
