@@ -34,10 +34,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/homeadmin" element={<Homeadmin />} />
+          <Route path="/admin" element={<Homeadmin />} />
           <Route path="/dondathang" element={<Dondathang />} />
-          <Route path="/Detail_product" element={<Detail_product />} />
-          <Route path="/admin/Product" element={<Product />} />
+          <Route path="/admin/product/detail" element={<Detail_product />} />
+          <Route path="/admin/product" element={<Product />} />
+          <Route path="/admin/login" element={<Dangnhapadmin />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Thanhtoan" element={<Thanhtoan />} />
           <Route path="/kiemtradon" element={<Kiemtradon />} />
@@ -57,10 +58,10 @@ function App() {
           <Route path="/hrctddhmn" element={<Hrctddhmn />} />
           <Route path="/thongtinkhachhang" element={<Thongtinkh />} />
 
-          <Route path="/account/login" element={<Dn />} />
-          <Route path="/account/register" element={<Dk />} />
+          <Route path="/login" element={<Dn />} />
+          <Route path="/register" element={<Dk />} />
 
-          <Route path="/admin/dangnhap" element={<Dangnhapadmin />} />
+          <Route path="/admin/login" element={<Dangnhapadmin />} />
           <Route path="/Detail/:title/:id" element={<Detail />} />
         </Routes>
       </Router>

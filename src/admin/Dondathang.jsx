@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { FaTrashAlt } from 'react-icons/fa';
-import axios from 'axios';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
-import { AiFillCaretDown } from 'react-icons/ai';
+import { Grid } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
+import { AdminHeader } from "./AdminHeader";
+import AdminSidebar from "./AdminSidebar";
 
 export default function Dondathang() {
   const [dh, setDh] = useState([]);
@@ -14,7 +14,9 @@ export default function Dondathang() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/api/dondathang`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/dondathang`
+      );
       setDh(response.data);
     } catch (error) {
       console.log(error);
@@ -23,9 +25,11 @@ export default function Dondathang() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_BASEURL}/api/admindeletedondathang/${id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_BASEURL}/api/admindeletedondathang/${id}`
+      );
       fetchData();
-      alert('Xóa sản phẩm thành công');
+      alert("Xóa sản phẩm thành công");
     } catch (error) {
       console.log(error);
     }
@@ -33,9 +37,12 @@ export default function Dondathang() {
 
   const handleTinhTrangDonChange = async (id, selectedOption) => {
     try {
-      await axios.put(`${process.env.REACT_APP_BASEURL}/api/update-tinhtrangdon/${id}`, {
-        tinhtrangdon: selectedOption,
-      });
+      await axios.put(
+        `${process.env.REACT_APP_BASEURL}/api/update-tinhtrangdon/${id}`,
+        {
+          tinhtrangdon: selectedOption,
+        }
+      );
       // Optionally, perform any additional actions or updates after successful database update
     } catch (error) {
       console.log(error);
@@ -49,11 +56,13 @@ export default function Dondathang() {
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="container-fluid" id="main">
-        <div className="row row-offcanvas row-offcanvas-left">
-          <Sidebar />
+    <>
+      <AdminHeader />
+      <Grid container spacing={2} columns={24}>
+        <Grid item xs={5}>
+          <AdminSidebar />
+        </Grid>
+        <Grid item xs={19}>
           <div className="custom-margin-top">
             <h2>Danh sách đơn hàng đã đặt</h2>
             <table className="table">
@@ -87,7 +96,10 @@ export default function Dondathang() {
                     <td>{donhang.created_at}</td>
                     <td>{donhang.pttt}</td>
                     <td>
-                      <select value={donhang.tinhtrangdon} onChange={(e) => handleSelectChange(e, donhang.id)}>
+                      <select
+                        value={donhang.tinhtrangdon}
+                        onChange={(e) => handleSelectChange(e, donhang.id)}
+                      >
                         <option value="cho-duyet">Chờ duyệt</option>
                         <option value="dang-giao-hang">Đang giao hàng</option>
                         <option value="da-giao">Đã giao</option>
@@ -103,9 +115,8 @@ export default function Dondathang() {
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-    </div>
+        </Grid>
+      </Grid>
+    </>
   );
 }
-

@@ -184,10 +184,10 @@ function Header() {
             </Box>
           ) : (
             <Box>
-              <Link to="/account/login">
+              <Link to="/login">
                 <Button variant="contained">Đăng nhập</Button>
               </Link>
-              <Link to="account/register">
+              <Link to="/register">
                 <Button variant="outlined" sx={{ color: "#fff" }}>
                   Đăng ký
                 </Button>

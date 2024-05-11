@@ -1,27 +1,23 @@
-import React, { useState } from 'react'
+import React from "react";
 
+import Dashboard from "./Dashboard";
 
-import Dashboard from './Dashboard';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
-
-import { useEffect } from 'react';
-import axios from 'axios';
+import { Grid } from "@mui/material";
+import { AdminHeader } from "./AdminHeader";
+import AdminSidebar from "./AdminSidebar";
 
 export default function Homeadmin() {
-
-
   return (
-    <div>
-      <Navbar/>
-                <div class="container-fluid" id="main">
-                 <div class="row row-offcanvas row-offcanvas-left">
-                   <Sidebar/>
-                  <Dashboard/>
-                
-             </div>
-            </div>  
-
-    </div>
-  )
+    <>
+      <AdminHeader />
+      <Grid container spacing={2} columns={24}>
+        <Grid item xs={5}>
+          <AdminSidebar />
+        </Grid>
+        <Grid item xs={19}>
+          <Dashboard />
+        </Grid>
+      </Grid>
+    </>
+  );
 }
