@@ -24,13 +24,12 @@ export default function Checkout() {
 
   // Lấy chỉ giá trị của thuộc tính "title" vào một mảng mới
   const titles = objectArray.map((obj) => obj.title);
-  console.log(titles.join(", "));
+  const titleSubmit = titles.join(", ");
   const danhsachnganhang = [
     "chọn ngân hàng",
     "Vietcombank",
     "BIDV",
     "NCB",
-
     "VietinBank",
     "Eximbank",
     "Sacombank",
@@ -98,21 +97,23 @@ export default function Checkout() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append("tenspclient", titles.join(", "));
+      formData.append("sanpham", titleSubmit);
       formData.append("tongtienclient", tongcart);
       formData.append("nganhangclient", nganhangclient);
       formData.append("madonhangclient", madonhang);
       formData.append("dkdn_id", userId);
 
-      await axios.post(
-        `${process.env.REACT_APP_BASEURL}/api/checkclient`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      // console.log({ titleSubmit, tongcart, nganhangclient, madonhang, userId });
+
+      // await axios.post(
+      //   `${process.env.REACT_APP_BASEURL}/api/checkclient`,
+      //   formData,
+      //   {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   }
+      // );
 
       const checkoutResponse = await axios.post(
         `${process.env.REACT_APP_BASEURL}/api/checkout/${userId}`,
@@ -252,150 +253,6 @@ export default function Checkout() {
               Chuyển đến Thanh toán VNPAY
             </button>
           </form>
-        </div>
-
-        {/* dkfalkjg */}
-
-        <div
-          style={{
-            marginTop: "20px",
-            borderRadius: "15px",
-            background: "#cc9c69",
-          }}
-        >
-          <div class="container-fluid fh5co_footer_bg pb-3">
-            <div class="container animate-box">
-              <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
-                  <div class="footer_main_title py-3"> Địa chỉ tòa soạn</div>
-                  <div class="footer_sub_about pb-3">
-                    {" "}
-                    Trụ sở chính: Số 138A Giảng Võ - Quận Ba Đình - Thành phố Hà
-                    Nội Địa chỉ liên hệ: Tòa nhà Tổng cục Dân số, ngõ 8 đường
-                    Tôn Thất Thuyết, quận Nam Từ Liêm, TP Hà Nội Điện thoại:
-                    024.3846.1042 - Fax: 024.3844.3144 Đường dây nóng:
-                    0931.965.967 Email: giadinhnet@suckhoedoisong.vn
-                  </div>
-                  <div class="footer_mediya_icon">
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-linkedin"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-google-plus"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-twitter"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-facebook"></i>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-3 col-lg-2">
-                  <div class="footer_main_title py-3"> Category</div>
-                  <ul class="footer_menu">
-                    <li>
-                      <a href="{{url('/kinhdoanh')}}">
-                        <i class="fa fa-angle-right"></i> kinh doanh
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/khoahoc')}}">
-                        <i class="fa fa-angle-right"></i> khoa học
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/thoitrang')}}">
-                        <i class="fa fa-angle-right"></i> Thời trang
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/giaoduc')}}">
-                        <i class="fa fa-angle-right"></i> Giáo dục 4.0
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/giaothong')}}">
-                        <i class="fa fa-angle-right"></i> Giao thông
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/laodongvieclam')}}">
-                        <i class="fa fa-angle-right"></i> Lao động việc làm
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/thegioitunhien')}}">
-                        <i class="fa fa-angle-right"></i> Thế giới tự nhiên
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/cacmonthethaokhac')}}">
-                        <i class="fa fa-angle-right"></i> Các môn thể thao khác
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
-                  <div class="footer_main_title py-3">
-                    {" "}
-                    Liên Hệ Quảng Cáo: ADMICRO
-                  </div>
-                  <div class="footer_makes_sub_font">
-                    Hotline: 0794.46.33.33 - 0961.98.43.88 Email:
-                    giadinh@admicro.vn
-                  </div>
-                  Add: Tầng 20, tòa nhà Center Building, Hapulico Complex, số 1
-                  Nguyễn Huy Tưởng, phường Thanh Xuân Trung, quận Thanh Xuân, Hà
-                  Nội
-                </div>
-                <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
-                  <div class="footer_main_title py-3">
-                    {" "}
-                    CHUYÊN TRANG GIA ĐÌNH VÀ XÃ HỘI - BÁO ĐIỆN TỬ SỨC KHỎE VÀ
-                    ĐỜI SỐNG
-                  </div>
-                  <div class="footer_makes_sub_font">
-                    Cơ quan chủ quản: Bộ Y tế Tổng biên tập: Trần Tuấn Linh
-                  </div>
-                  Cơ quan chủ quản: Bộ Y tế Tổng biên tập: Trần Tuấn Linh Hoạt
-                  động theo Giấy phép số 60/GP-CBC ngày 23/7/2021 của Cục Báo
-                  chí - Bộ Thông tin và Truyền thông ® Mọi hình thức sao chép
-                  thông tin, hình ảnh phải có sự đồng ý bằng văn bản. Vui lòng
-                  dẫn “giadinh.suckhoedoisong.vn” khi phát hành lại thông tin từ
-                  website này.
-                </div>
-              </div>
-              <div class="row justify-content-center pt-2 pb-4">
-                <div class="col-12 col-md-8 col-lg-7 ">
-                  <div class="input-group">
-                    <span
-                      class="input-group-addon fh5co_footer_text_box"
-                      id="basic-addon1"
-                    >
-                      <i class="fa fa-envelope"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </Container>
     </Box>

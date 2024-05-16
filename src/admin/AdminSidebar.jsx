@@ -1,21 +1,18 @@
-import * as React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
-import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import ListSubheader from "@mui/material/ListSubheader";
+import * as React from "react";
 import { Link } from "react-router-dom";
 
 export default function AdminSidebar() {
@@ -46,6 +43,14 @@ export default function AdminSidebar() {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
+          <Link to="/admin/productall">
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <ReceiptLongIcon />
+              </ListItemIcon>
+              <ListItemText primary="Xem danh sách sản phẩm" />
+            </ListItemButton>
+          </Link>
           <Link to="/admin/product">
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>

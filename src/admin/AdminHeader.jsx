@@ -114,9 +114,9 @@ export function AdminHeader() {
           >
             <MenuItem onClick={handleClose}>
               <Box>
-                <Typography fontWeight={600}>Nguyen Ngoc Thach</Typography>
+                <Typography fontWeight={600}>Nguyễn Ngọc Thạch</Typography>
                 <Typography variant="body2" color="#667085">
-                  ngocthach@globosoftware.net
+                  i3oyhp@gmail.com
                 </Typography>
               </Box>
             </MenuItem>
@@ -137,7 +137,7 @@ export function AdminHeader() {
                 Settings
               </MenuItem>
             </Link>
-            <Link to="/account/login">
+            <Link to="/admin/login">
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <Logout fontSize="small" />

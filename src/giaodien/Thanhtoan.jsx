@@ -7,8 +7,24 @@ import { FaTrashAlt } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Box, Container } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Header from "../components/Header";
+import { Footer } from "../components/Footer";
+import useMoneyFormat from "../hooks/useMoneyFormat";
 
 export default function Thanhtoan() {
   const [formData, setFormData] = useState(new FormData());
@@ -27,8 +43,10 @@ export default function Thanhtoan() {
   const [cities, setCities] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedWard, setSelectedWard] = useState("");
   const [tinhtp, setTinhtp] = useState("");
   const [quanhuyen, setQuanhuyen] = useState("");
   const [phuongxa, setPhuongxa] = useState("");
@@ -49,12 +67,15 @@ export default function Thanhtoan() {
   const [thongtinbosung, setthongtinbosung] = useState("");
 
   const [isCashOnDelivery, setIsCashOnDelivery] = useState(false);
-  const [isBankTransfer, setIsBankTransfer] = useState(false);
 
   const [sanpham, setsanpham] = useState([]);
 
   const [tongcart, settongcart] = useState(0);
   const [pttt, setpttt] = useState("");
+
+  const handleDeliveryChange = (event) => {
+    setIsCashOnDelivery(event.target.value);
+  };
 
   useEffect(() => {
     localStorage.setItem("tongcart", JSON.stringify(tongcart));
@@ -68,10 +89,10 @@ export default function Thanhtoan() {
   useEffect(() => {
     if (isCashOnDelivery) {
       setpttt("thanh toán tiền mặt");
-    } else if (isBankTransfer) {
+    } else {
       setpttt("chuyển khoản ngân hàng");
     }
-  }, [isCashOnDelivery, isBankTransfer]);
+  }, [isCashOnDelivery]);
 
   const handleSubmit = async (e) => {
     const sanphamString = sanpham
@@ -114,7 +135,7 @@ export default function Thanhtoan() {
         // Hiển thị thông báo đặt hàng thành công
         alert("Bạn đã đặt hàng thành công");
 
-        window.location.reload();
+        navigate("/");
 
         try {
           const response2 = await axios.post(
@@ -164,28 +185,18 @@ export default function Thanhtoan() {
     localStorage.setItem("formData", JSON.stringify(formDataValues));
   };
 
-  //dfgkldfgkld
-
-  const handleCashOnDeliveryChange = () => {
-    setIsCashOnDelivery(true);
-    setIsBankTransfer(false);
-  };
-
-  const handleBankTransferChange = () => {
-    setIsCashOnDelivery(false);
-    setIsBankTransfer(true);
-  };
-
   useEffect(() => {
     fetch("https://vapi.vnappmob.com/api/province")
       .then((response) => response.json())
       .then((data) => {
         setCities(data.results);
+        console.log({ cities });
       });
   }, []);
 
   useEffect(() => {
     if (selectedCity) {
+      console.log({ selectedCity }, `district/${selectedCity}`);
       fetch(`https://vapi.vnappmob.com/api/province/district/${selectedCity}`)
         .then((response) => response.json())
         .then((data) => {
@@ -212,15 +223,6 @@ export default function Thanhtoan() {
     }
   }, [selectedDistrict]);
 
-  const handleCityChange = (e) => {
-    setSelectedCity(e.target.value);
-    setSelectedDistrict("");
-  };
-
-  const handleDistrictChange = (e) => {
-    setSelectedDistrict(e.target.value);
-  };
-
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_BASEURL}/api/users/${userId}/homecart`)
@@ -241,7 +243,7 @@ export default function Thanhtoan() {
   return (
     <Box>
       <Header />
-      <Container maxWidth="xl" sx={{ mt: 4, display: "flex", gap: 2 }}>
+      <Container maxWidth="xl" sx={{ mt: 4, display: "flex", gap: 2, mb: 2 }}>
         <Box width="60%">
           <div className="thanhtoancontainer">
             <div className="thanhtoanleft">
@@ -257,47 +259,35 @@ export default function Thanhtoan() {
                     name="hovaten"
                     className="form-control"
                     id="title"
-                    placeholder="Nhập Tên Sản Phẩm"
+                    placeholder="Nhập họ và tên"
                     required
                     value={hovaten}
                     onChange={(e) => sethovaten(e.target.value)}
                   />
                 </div>
 
-                <div className="form-group">
-                  <label style={{ float: "left" }} htmlFor="">
-                    Địa chỉ
-                  </label>
-                  <input
-                    type="text"
-                    name="diachi"
-                    className="form-control"
-                    id="gia"
-                    placeholder="Nhập Địa chỉ"
-                    required
-                    value={diachi}
-                    onChange={(e) => setdiachi(e.target.value)}
-                  />
-                </div>
-
-                <div
-                  className="tinhtpdc"
-                  style={{ display: "flex", float: "left" }}
-                >
-                  <div className="form-group" style={{ width: "33%" }}>
-                    <label htmlFor="category_id">Chọn tỉnh/Thành phố</label>
-                    <select
-                      required
-                      defaultValue={tinhtp} // Thay đổi value thành defaultValue
+                <Box sx={{ display: "flex", gap: 2, my: 1 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="select-tinh-tp-label">
+                      Chọn tỉnh/thành phố
+                    </InputLabel>
+                    <Select
+                      labelId="select-tinh-tp-label"
+                      id="select-tinh-tp"
+                      value={selectedCity}
+                      label="Chọn tỉnh/thành phố"
                       onChange={(e) => {
                         const selectedValue = e.target.value;
+                        console.log({ selectedValue });
                         const selectedCity = cities.find(
                           (city) => city.province_id === selectedValue
                         );
+                        console.log({ selectedCity });
+
                         const selectedValueString = selectedCity
                           ? selectedCity.province_name
                           : "";
-                        console.log(selectedValueString);
+                        console.log({ selectedValueString });
                         setTinhtp(selectedValueString || "");
                         setSelectedCity(selectedValue);
                         setSelectedDistrict("");
@@ -305,22 +295,26 @@ export default function Thanhtoan() {
                         setPhuongxa("");
                       }}
                     >
-                      <option value="" disabled hidden>
-                        Chọn danh mục...
-                      </option>
                       {cities.map((city) => (
-                        <option key={city.province_id} value={city.province_id}>
+                        <MenuItem
+                          value={city.province_id}
+                          key={city.province_id}
+                        >
                           {city.province_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    </select>
-                  </div>
+                    </Select>
+                  </FormControl>
 
-                  <div className="form-group" style={{ width: "33%" }}>
-                    <label htmlFor="category_id">Chọn quận/huyện</label>
-                    <select
-                      required
-                      defaultValue={quanhuyen}
+                  <FormControl fullWidth>
+                    <InputLabel id="select-quan-huyen-label">
+                      Chọn quận/huyện
+                    </InputLabel>
+                    <Select
+                      labelId="select-quan-huyen-label"
+                      id="select-quan-huyen"
+                      value={selectedDistrict}
+                      label="Chọn quận/huyện"
                       onChange={(e) => {
                         const selectedValue = e.target.value;
                         const selectedDistrict = districts.find(
@@ -336,25 +330,26 @@ export default function Thanhtoan() {
                         setPhuongxa("");
                       }}
                     >
-                      <option value="" disabled hidden>
-                        Chọn quận/huyện
-                      </option>
                       {districts.map((district) => (
-                        <option
+                        <MenuItem
                           key={district.district_id}
                           value={district.district_id}
                         >
                           {district.district_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    </select>
-                  </div>
+                    </Select>
+                  </FormControl>
 
-                  <div className="form-group" style={{ width: "33%" }}>
-                    <label htmlFor="category_id">Chọn phường/xã</label>
-                    <select
-                      required
-                      defaultValue={phuongxa}
+                  <FormControl fullWidth>
+                    <InputLabel id="select-phuong-xa-label">
+                      Chọn phường/xã
+                    </InputLabel>
+                    <Select
+                      labelId="select-phuong-xa-label"
+                      id="select-phuong-xa"
+                      value={selectedWard}
+                      label="Chọn phường/xã"
                       onChange={(e) => {
                         const selectedValue = e.target.value;
                         const selectedWard = wards.find(
@@ -364,19 +359,32 @@ export default function Thanhtoan() {
                           ? selectedWard.ward_name
                           : "";
                         console.log(selectedValueString);
+                        setSelectedWard(selectedValue);
                         setPhuongxa(selectedValueString);
                       }}
                     >
-                      <option value="" disabled hidden>
-                        Chọn phường/xã
-                      </option>
                       {wards.map((ward) => (
-                        <option key={ward.ward_id} value={ward.ward_id}>
+                        <MenuItem key={ward.ward_id} value={ward.ward_id}>
                           {ward.ward_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    </select>
-                  </div>
+                    </Select>
+                  </FormControl>
+                </Box>
+                <div className="form-group">
+                  <label style={{ float: "left" }} htmlFor="">
+                    Địa chỉ
+                  </label>
+                  <input
+                    type="text"
+                    name="diachi"
+                    className="form-control"
+                    id="gia"
+                    placeholder="Nhập địa chỉ"
+                    required
+                    value={diachi}
+                    onChange={(e) => setdiachi(e.target.value)}
+                  />
                 </div>
 
                 <div className="form-group">
@@ -388,7 +396,7 @@ export default function Thanhtoan() {
                     name="sdt"
                     className="form-control"
                     id="gia"
-                    placeholder="Nhập Số điện thoại của bạn"
+                    placeholder="Nhập số điện thoại của bạn"
                     required
                     value={sdt}
                     onChange={(e) => setsdt(e.target.value)}
@@ -396,9 +404,7 @@ export default function Thanhtoan() {
                 </div>
 
                 <div className="thongtinbosung">
-                  <span style={{ float: "left", color: "blue" }}>
-                    THÔNG TIN BỔ SUNG
-                  </span>
+                  <Typography variant="h5">THÔNG TIN BỔ SUNG</Typography>
                   <br></br>
                   <span style={{ float: "left" }}>
                     Ghi chú đơn hàng (thời gian nhận hàng,nơi nhận)
@@ -407,7 +413,7 @@ export default function Thanhtoan() {
                   <textarea
                     value={thongtinbosung}
                     onChange={(e) => setthongtinbosung(e.target.value)}
-                    style={{ float: "left" }}
+                    style={{ float: "left", padding: "10px" }}
                     name=""
                     id=""
                     cols="78"
@@ -448,10 +454,12 @@ export default function Thanhtoan() {
                       }}
                     >
                       <div style={{ width: 400 }} className="sanpham-info">
-                        {sp.title} - (size: {sp.size})
+                        {sp.title} - (size: {sp.size}) - x {sp.soluong}
                       </div>
                       <div style={{ textAlign: "right" }}>
-                        <span className="tong-info">{sp.gia}.000đ</span>
+                        <span className="tong-info">
+                          {sp.gia * sp.soluong}.000 ₫
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -460,13 +468,13 @@ export default function Thanhtoan() {
                 <hr></hr>
                 <div className="chitietabcdthanhtoan">
                   <span className="sanpham-info">Phí vận chuyển</span>
-                  <span className="tong-info">30.000đ</span>
+                  <span className="tong-info">30.000 ₫</span>
                 </div>
                 <hr></hr>
                 <div className="chitietabcdthanhtoan">
                   <span className="sanpham-info">Thành tiền</span>
 
-                  <span className="tong-info">{tongcart} đ</span>
+                  <span className="tong-info">{useMoneyFormat(tongcart)}</span>
                 </div>
                 <hr></hr>
                 <div className="giamgia-container">
@@ -477,193 +485,51 @@ export default function Thanhtoan() {
                   />
                   <button className="giamgia-button">Áp dụng</button>
                 </div>
-                <div className="payment-method">
-                  <p>Phương thức thanh toán</p>
-                  <div>
-                    <input
-                      type="checkbox"
-                      id="cash-on-delivery"
-                      checked={isCashOnDelivery}
-                      onClick={handleCashOnDeliveryChange}
-                    />
-                    <label htmlFor="cash-on-delivery">
-                      Trả tiền mặt khi nhận hàng
-                    </label>
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      id="bank-transfer"
-                      checked={isBankTransfer}
-                      onClick={handleBankTransferChange}
-                    />
-                    <label htmlFor="bank-transfer">
-                      Chuyển khoản ngân hàng
-                    </label>
-                  </div>
-                </div>
               </div>
             </div>
-            {isBankTransfer && (
-              <div className="noidungck" style={{ marginTop: -45 }}>
-                <label htmlFor="paymentMethod">Phương thức thanh toán:</label>
-                <select name="paymentMethod" id="paymentMethod">
-                  <option value="vnpay">Thanh toán qua VNPAY</option>
-                </select>
-                <button onClick={handlePayment}>
-                  <Link to="/checkout"> Thanh toán </Link>
-                </button>
-              </div>
-            )}
 
-            <button style={{ marginTop: 15 }} onClick={handleSubmit}>
-              đặt hàng
-            </button>
+            <FormControl>
+              <FormLabel id="payment-metthod">
+                Chọn phương thức thanh toán
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="payment-metthod"
+                value={isCashOnDelivery}
+                onChange={handleDeliveryChange}
+              >
+                <FormControlLabel
+                  value={true}
+                  control={<Radio />}
+                  label="Thanh toán khi nhận hàng"
+                  onClick={() => setIsCashOnDelivery(true)}
+                />
+                <FormControlLabel
+                  value={false}
+                  control={<Radio />}
+                  label="Thanh toán qua VNPAY"
+                  onClick={() => setIsCashOnDelivery(false)}
+                />
+              </RadioGroup>
+            </FormControl>
+
+            {isCashOnDelivery ? (
+              <Button variant="contained" onClick={handleSubmit}>
+                Đặt hàng
+              </Button>
+            ) : (
+              <Button variant="contained" onClick={handlePayment}>
+                <Link to="/checkout" sx={{ textDecoration: "none" }}>
+                  <Typography sx={{ color: "#fff" }}>
+                    Thanh toán với VNPAY
+                  </Typography>
+                </Link>
+              </Button>
+            )}
           </div>
         </Box>
       </Container>
-      <Box>
-        <div
-          style={{
-            marginTop: "20px",
-            borderRadius: "15px",
-            background: "#cc9c69",
-          }}
-        >
-          <div class="container-fluid fh5co_footer_bg pb-3">
-            <div class="container animate-box">
-              <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
-                  <div class="footer_main_title py-3"> Địa chỉ tòa soạn</div>
-                  <div class="footer_sub_about pb-3">
-                    {" "}
-                    Trụ sở chính: Số 138A Giảng Võ - Quận Ba Đình - Thành phố Hà
-                    Nội Địa chỉ liên hệ: Tòa nhà Tổng cục Dân số, ngõ 8 đường
-                    Tôn Thất Thuyết, quận Nam Từ Liêm, TP Hà Nội Điện thoại:
-                    024.3846.1042 - Fax: 024.3844.3144 Đường dây nóng:
-                    0931.965.967 Email: giadinhnet@suckhoedoisong.vn
-                  </div>
-                  <div class="footer_mediya_icon">
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-linkedin"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-google-plus"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-twitter"></i>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="text-center d-inline-block">
-                      <a class="fh5co_display_table_footer">
-                        <div class="fh5co_verticle_middle">
-                          <i class="fa fa-facebook"></i>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-3 col-lg-2">
-                  <div class="footer_main_title py-3"> Category</div>
-                  <ul class="footer_menu">
-                    <li>
-                      <a href="{{url('/kinhdoanh')}}">
-                        <i class="fa fa-angle-right"></i> kinh doanh
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/khoahoc')}}">
-                        <i class="fa fa-angle-right"></i> khoa học
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/thoitrang')}}">
-                        <i class="fa fa-angle-right"></i> Thời trang
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/giaoduc')}}">
-                        <i class="fa fa-angle-right"></i> Giáo dục 4.0
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/giaothong')}}">
-                        <i class="fa fa-angle-right"></i> Giao thông
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/laodongvieclam')}}">
-                        <i class="fa fa-angle-right"></i> Lao động việc làm
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/thegioitunhien')}}">
-                        <i class="fa fa-angle-right"></i> Thế giới tự nhiên
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{url('/cacmonthethaokhac')}}">
-                        <i class="fa fa-angle-right"></i> Các môn thể thao khác
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
-                  <div class="footer_main_title py-3">
-                    {" "}
-                    Liên Hệ Quảng Cáo: ADMICRO
-                  </div>
-                  <div class="footer_makes_sub_font">
-                    Hotline: 0794.46.33.33 - 0961.98.43.88 Email:
-                    giadinh@admicro.vn
-                  </div>
-                  Add: Tầng 20, tòa nhà Center Building, Hapulico Complex, số 1
-                  Nguyễn Huy Tưởng, phường Thanh Xuân Trung, quận Thanh Xuân, Hà
-                  Nội
-                </div>
-                <div class="col-12 col-md-5 col-lg-3 position_footer_relative">
-                  <div class="footer_main_title py-3">
-                    {" "}
-                    CHUYÊN TRANG GIA ĐÌNH VÀ XÃ HỘI - BÁO ĐIỆN TỬ SỨC KHỎE VÀ
-                    ĐỜI SỐNG
-                  </div>
-                  <div class="footer_makes_sub_font">
-                    Cơ quan chủ quản: Bộ Y tế Tổng biên tập: Trần Tuấn Linh
-                  </div>
-                  Cơ quan chủ quản: Bộ Y tế Tổng biên tập: Trần Tuấn Linh Hoạt
-                  động theo Giấy phép số 60/GP-CBC ngày 23/7/2021 của Cục Báo
-                  chí - Bộ Thông tin và Truyền thông ® Mọi hình thức sao chép
-                  thông tin, hình ảnh phải có sự đồng ý bằng văn bản. Vui lòng
-                  dẫn “giadinh.suckhoedoisong.vn” khi phát hành lại thông tin từ
-                  website này.
-                </div>
-              </div>
-              <div class="row justify-content-center pt-2 pb-4">
-                <div class="col-12 col-md-8 col-lg-7 ">
-                  <div class="input-group">
-                    <span
-                      class="input-group-addon fh5co_footer_text_box"
-                      id="basic-addon1"
-                    >
-                      <i class="fa fa-envelope"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <Box mt={2}>
+        <Footer />
       </Box>
     </Box>
   );

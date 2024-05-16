@@ -17,7 +17,7 @@ export default function Dangnhapadmin() {
       );
       if (response.status === 200) {
         alert("Login successful");
-        navigate("/homeadmin");
+        navigate("/admin/dashboard");
       } else {
         alert("Login failed");
       }

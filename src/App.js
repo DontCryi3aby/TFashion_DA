@@ -11,7 +11,7 @@ import Dn from "./giaodien/Dangnhap";
 import Product from "./admin/Product";
 import Detail_product from "./admin/Detail_product";
 import { Cart } from "./giaodien/Cart";
-import Thanhtoan from "./giaodien/Thanhtoan1";
+import Thanhtoan from "./giaodien/Thanhtoan";
 import Sominu from "./giaodien/Sominu";
 import Chanvay from "./giaodien/Chanvay";
 import Vaydamcongso from "./giaodien/Vaydamcongso";
@@ -27,6 +27,7 @@ import Cdcvbc from "./giaodien/thegioicuaphaidep/Cdcvbc";
 import Nbvanvddx from "./giaodien/thegioicuaphaidep/Nbvanvddx";
 import Checkout from "./giaodien/Checkout";
 import Kiemtradon from "./giaodien/Kiemtradon";
+import ProductAll from "./admin/ProductAll";
 
 function App() {
   return (
@@ -34,11 +35,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Homeadmin />} />
+          <Route path="/admin/dashboard" element={<Homeadmin />} />
           <Route path="/dondathang" element={<Dondathang />} />
           <Route path="/admin/product/detail" element={<Detail_product />} />
           <Route path="/admin/product" element={<Product />} />
-          <Route path="/admin/login" element={<Dangnhapadmin />} />
+          <Route path="/admin/productall" element={<ProductAll />} />
+          <Route path="/admin" element={<Dangnhapadmin />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Thanhtoan" element={<Thanhtoan />} />
           <Route path="/kiemtradon" element={<Kiemtradon />} />
