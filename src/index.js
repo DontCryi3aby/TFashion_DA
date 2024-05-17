@@ -6,6 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./utils/theme";
+import "@splidejs/react-splide/css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

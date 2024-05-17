@@ -9,6 +9,12 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import Logo from "../assets/images/Logo.jpg";
+import footerImg1 from "../assets/images/footer1.jpg";
+import footerImg2 from "../assets/images/footer2.jpg";
+import footerImg3 from "../assets/images/footer3.png";
+import footerImg4 from "../assets/images/footer4.png";
+import footerImg5 from "../assets/images/footer5.jpg";
+import footerImg6 from "../assets/images/footer6.jpg";
 
 export function Footer(props) {
   return (
@@ -22,17 +28,23 @@ export function Footer(props) {
       }}
     >
       <Container maxWidth="xl">
-        <Grid container spacing={2}>
+        <Grid container spacing={8}>
           <Grid item xs={4}>
             <Stack>
               <Box width={120}>
                 <img src={Logo} alt="Logo" />
               </Box>
               <Typography variant="body2" sx={{ textAlign: "justify", mt: 4 }}>
-                TFashion store is a premium theme with advanced admin module.
-                It’s extremely customizable, easy to use and fully responsive
-                and retina ready.
+                Thời trang công sở TFashion được thành lập từ năm 2015 với bước
+                đi đầu tiên từ một cửa hàng nhỏ mặt ngõ nhưng được gây dựng, vận
+                hành bởi những con người tâm huyết và có tầm nhìn rõ ràng.
               </Typography>
+              <Typography variant="body2" sx={{ textAlign: "justify", mt: 4 }}>
+                TFashion định vị thương hiệu trong lĩnh vực Thời trang công sở
+                nữ, và sau gần 7 năm hoạt động không biết mệt mỏi, đã có vị thế
+                vững chắc của riêng mình trong làng thời trang công sở Việt Nam.
+              </Typography>
+
               <Box height={25} sx={{ mt: 4 }}>
                 <img
                   src="http://blueskytechco.net/mazia/media/wysiwyg/payment.png"
@@ -44,39 +56,63 @@ export function Footer(props) {
           <Grid item xs={8}>
             <Grid container>
               <Grid item xs={3}>
-                <Typography sx={{ mb: 5 }}>MY ACCOUNT</Typography>
-                <Typography variant="body2">My Account</Typography>
-                <Typography variant="body2">Checkout</Typography>
-                <Typography variant="body2">Shopping Cart</Typography>
-                <Typography variant="body2">Wishlist</Typography>
-                <Typography variant="body2">Custom Link</Typography>
-                <Typography variant="body2">Terms & Conditions</Typography>
+                <Typography align="left" sx={{ mb: 5 }}>
+                  THÔNG TIN LIÊN HỆ
+                </Typography>
+                <Typography align="left" variant="body2">
+                  Số 41, Ngõ 134,Nguyên Xá
+                </Typography>
+                <Typography align="left" variant="body2">
+                  i3oyhp@gmail.com
+                </Typography>
+                <Typography align="left" variant="body2">
+                  (07) 057.681.03
+                </Typography>
+                <Typography align="left" variant="body2">
+                  (09) 696.969.69
+                </Typography>
               </Grid>
               <Grid item xs={3}>
-                <Typography sx={{ mb: 5 }}>QUICK LINK</Typography>
-                <Typography variant="body2">Store Location</Typography>
-                <Typography variant="body2">My Account</Typography>
-                <Typography variant="body2">Orders Tracking</Typography>
-                <Typography variant="body2">Size Guide</Typography>
-                <Typography variant="body2">FAQs</Typography>
-                <Typography variant="body2">Shipping Policy</Typography>
+                <Typography align="left" sx={{ mb: 5 }}>
+                  CHÍNH SÁCH
+                </Typography>
+                <Typography align="left" variant="body2">
+                  Chính sách bán hàng
+                </Typography>
+                <Typography align="left" variant="body2">
+                  Chính sách bảo mật
+                </Typography>
+                <Typography align="left" variant="body2">
+                  Đổi trả hoàn tiền
+                </Typography>
+                <Typography align="left" variant="body2">
+                  Hướng dẫn mua hàng
+                </Typography>
+                <Typography align="left" variant="body2">
+                  Tuyển dụng
+                </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography sx={{ mb: 5 }}>INSTAGRAM</Typography>
                 <ImageList
                   cols={3}
                   gap={0}
-                  rowHeight={123}
+                  rowHeight={120}
                   sx={{ overflowY: "hidden" }}
                 >
                   {itemData.map((item) => (
                     <ImageListItem key={item.img}>
-                      <Box>
+                      <Box sx={{ maxHeight: 120 }}>
                         <img
                           srcSet={`${item.img}`}
                           src={`${item.img}`}
                           alt={item.title}
                           loading="lazy"
+                          style={{
+                            objectFit: "cover",
+                            width: "100%",
+                            height: 120,
+                          }}
                         />
                       </Box>
                     </ImageListItem>
@@ -93,27 +129,27 @@ export function Footer(props) {
 
 const itemData = [
   {
-    img: "http://blueskytechco.net/mazia/media/instagram/17889749311627752_507835571.jpg",
-    title: "Breakfast",
+    img: footerImg1,
+    title: "Footer 1",
   },
   {
-    img: "http://blueskytechco.net/mazia/media/instagram/17862527753055125_1006386370.jpg",
-    title: "Burger",
+    img: footerImg2,
+    title: "Footer 2",
   },
   {
-    img: "http://blueskytechco.net/mazia/media/instagram/17860233158082263_259859570.jpg",
-    title: "Camera",
+    img: footerImg3,
+    title: "Footer 3",
   },
   {
-    img: "http://blueskytechco.net/mazia/media/instagram/18160500955019076_741109932.jpg",
-    title: "Coffee",
+    img: footerImg4,
+    title: "Footer 4",
   },
   {
-    img: "http://blueskytechco.net/mazia/media/instagram/17854475732183135_1816744513.jpg",
-    title: "Hats",
+    img: footerImg5,
+    title: "Footer 5",
   },
   {
-    img: "http://blueskytechco.net/mazia/media/instagram/17887577536639322_783458067.jpg",
-    title: "Honey",
+    img: footerImg6,
+    title: "Footer 6",
   },
 ];

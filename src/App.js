@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homeadmin from "./admin/Homeadmin";
 import Home from "./giaodien/Home";
 import Detail from "./giaodien/Detail";
 
@@ -28,6 +27,8 @@ import Nbvanvddx from "./giaodien/thegioicuaphaidep/Nbvanvddx";
 import Checkout from "./giaodien/Checkout";
 import Kiemtradon from "./giaodien/Kiemtradon";
 import ProductAll from "./admin/ProductAll";
+import Dashboard from "./admin/Dashboard";
+import Slider from "./components/Slider";
 
 function App() {
   return (
@@ -35,12 +36,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin/dashboard" element={<Homeadmin />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/dondathang" element={<Dondathang />} />
           <Route path="/admin/product/detail" element={<Detail_product />} />
           <Route path="/admin/product" element={<Product />} />
           <Route path="/admin/productall" element={<ProductAll />} />
-          <Route path="/admin" element={<Dangnhapadmin />} />
+          <Route path="/admin/login" element={<Dangnhapadmin />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Thanhtoan" element={<Thanhtoan />} />
           <Route path="/kiemtradon" element={<Kiemtradon />} />
@@ -63,7 +64,6 @@ function App() {
           <Route path="/login" element={<Dn />} />
           <Route path="/register" element={<Dk />} />
 
-          <Route path="/admin/login" element={<Dangnhapadmin />} />
           <Route path="/Detail/:title/:id" element={<Detail />} />
         </Routes>
       </Router>

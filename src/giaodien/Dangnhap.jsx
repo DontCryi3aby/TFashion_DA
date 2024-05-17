@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { BsFillCartFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom/dist";
-import { AiFillCaretDown } from "react-icons/ai";
-import axios from "axios";
+import AppleIcon from "@mui/icons-material/Apple";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {
@@ -18,9 +15,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import AppleIcon from "@mui/icons-material/Apple";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom/dist";
 
 export default function Dangnhap() {
   const userData = localStorage.getItem("userData");
