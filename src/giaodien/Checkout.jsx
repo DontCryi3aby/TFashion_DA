@@ -128,8 +128,7 @@ export default function Checkout() {
         }
       );
 
-      alert("Chuyển đến trang thanh toán");
-
+      console.log("Chuyển đến trang thanh toán", checkoutResponse.data.data);
       window.location.href = checkoutResponse.data.data;
     } catch (err) {
       console.log(err);
@@ -172,16 +171,21 @@ export default function Checkout() {
             }
           );
 
+          console.log("tao don hang thanh cong");
+
           await axios.post(
             `${process.env.REACT_APP_BASEURL}/api/send-mail/${userId}`
           );
+
+          console.log("send mail thanh cong");
           await axios.delete(
             `${process.env.REACT_APP_BASEURL}/api/giohang/${userId}/delete-all`
           );
-
-          setEmailSent(true); // Move the setEmailSent inside the try block to avoid setting it if an error occurs
+          console.log("Delete cart");
 
           alert("Bạn đã đặt hàng thành công");
+          setEmailSent(true); // Move the setEmailSent inside the try block to avoid setting it if an error occurs
+
           window.location.href = "http://localhost:3000";
         } catch (err) {
           console.log(err);

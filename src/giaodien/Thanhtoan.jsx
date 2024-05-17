@@ -101,60 +101,77 @@ export default function Thanhtoan() {
 
     e.preventDefault();
 
-    try {
-      const formData = new FormData();
-      formData.append("hovaten", hovaten);
-      formData.append("diachi", diachi);
-      formData.append("tinh", tinhtp);
-      formData.append("quanhuyen", quanhuyen);
-      formData.append("phuongxa", phuongxa);
-      formData.append("sdt", sdt);
-      formData.append("thongtinbosung", thongtinbosung);
-      formData.append("pttt", pttt);
-      formData.append("sanpham", sanphamString);
-      formData.append("dkdn_id", userId);
-      formData.append("thanhtien", tongcart);
-      formData.append("tinhtrangdon", tinhtrangdon);
+    console.log({
+      hovaten,
+      diachi,
+      tinhtp,
+      quanhuyen,
+      phuongxa,
+      sdt,
+      thongtinbosung,
+      pttt,
+      sanphamString,
+      userId,
+      tongcart,
+      tinhtrangdon,
+    });
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASEURL}/api/dondathang`,
-        formData,
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        }
-      );
+    if (hovaten && diachi && phuongxa && tinhtp && thongtinbosung && sdt) {
+      try {
+        const formData = new FormData();
+        formData.append("hovaten", hovaten);
+        formData.append("diachi", diachi);
+        formData.append("tinh", tinhtp);
+        formData.append("quanhuyen", quanhuyen);
+        formData.append("phuongxa", phuongxa);
+        formData.append("sdt", sdt);
+        formData.append("thongtinbosung", thongtinbosung);
+        formData.append("pttt", pttt);
+        formData.append("sanpham", sanphamString);
+        formData.append("dkdn_id", userId);
+        formData.append("thanhtien", tongcart);
+        formData.append("tinhtrangdon", tinhtrangdon);
 
-      if (response.status === 200) {
-        // Xóa sản phẩm khỏi giỏ hàng
-        await axios.delete(
-          `${process.env.REACT_APP_BASEURL}/api/giohang/${userId}/delete-all`
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASEURL}/api/dondathang`,
+          formData,
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          }
         );
 
-        // Hiển thị thông báo đặt hàng thành công
-        alert("Bạn đã đặt hàng thành công");
-
-        navigate("/");
-
-        try {
-          const response2 = await axios.post(
-            `${process.env.REACT_APP_BASEURL}/api/send-mail/${userId}`
+        if (response.status === 200) {
+          // Xóa sản phẩm khỏi giỏ hàng
+          await axios.delete(
+            `${process.env.REACT_APP_BASEURL}/api/giohang/${userId}/delete-all`
           );
-          console.log(response2.data.message);
-          // Display success message to the user
-        } catch (error) {
-          console.log(error.response.data.message);
-          // Display error message to the user
-        }
 
-        // Cập nhật giao diện người dùng để xóa sản phẩm khỏi giỏ hàng
-        // ...
-      } else {
+          // Hiển thị thông báo đặt hàng thành công
+          alert("Bạn đã đặt hàng thành công");
+
+          navigate("/");
+
+          try {
+            const response2 = await axios.post(
+              `${process.env.REACT_APP_BASEURL}/api/send-mail/${userId}`
+            );
+
+            console.log("mail sentttt");
+            console.log(response2.data.message);
+            // Display success message to the user
+          } catch (error) {
+            alert("Có lỗi xảy ra khi đặt hàng");
+          }
+
+          // Cập nhật giao diện người dùng để xóa sản phẩm khỏi giỏ hàng
+          // ...
+        }
+      } catch (err) {
         alert("Có lỗi xảy ra khi đặt hàng");
       }
-    } catch (err) {
-      console.log(err);
+    } else {
       alert("Bạn phải điền đầy đủ thông tin trước khi đặt hàng");
     }
   };
@@ -166,23 +183,29 @@ export default function Thanhtoan() {
     const sanphamString = sanpham
       .map((sp) => `${sp.title}-(size:${sp.size})`)
       .join("\n");
-    const formDataValues = {
-      hovaten,
-      diachi,
-      tinhtp,
-      quanhuyen,
-      phuongxa,
-      sdt,
-      thongtinbosung,
-      pttt,
-      sanpham: sanphamString,
-      dkdn_id: userId,
-      tinhtrangdon,
-      thanhtien: tongcart,
-    };
 
-    // Save the form data in localStorage
-    localStorage.setItem("formData", JSON.stringify(formDataValues));
+    if (hovaten && diachi && phuongxa && tinhtp && thongtinbosung && sdt) {
+      const formDataValues = {
+        hovaten,
+        diachi,
+        tinhtp,
+        quanhuyen,
+        phuongxa,
+        sdt,
+        thongtinbosung,
+        pttt,
+        sanpham: sanphamString,
+        dkdn_id: userId,
+        tinhtrangdon,
+        thanhtien: tongcart,
+      };
+
+      // Save the form data in localStorage
+      localStorage.setItem("formData", JSON.stringify(formDataValues));
+      navigate("/checkout");
+    } else {
+      alert("Bạn phải điền đầy đủ thông tin trước khi đặt hàng");
+    }
   };
 
   useEffect(() => {
@@ -518,11 +541,9 @@ export default function Thanhtoan() {
               </Button>
             ) : (
               <Button variant="contained" onClick={handlePayment}>
-                <Link to="/checkout" sx={{ textDecoration: "none" }}>
-                  <Typography sx={{ color: "#fff" }}>
-                    Thanh toán với VNPAY
-                  </Typography>
-                </Link>
+                <Typography sx={{ color: "#fff" }}>
+                  Thanh toán với VNPAY
+                </Typography>
               </Button>
             )}
           </div>

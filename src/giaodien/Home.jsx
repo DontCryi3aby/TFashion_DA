@@ -13,10 +13,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import { Footer } from "../components/Footer";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Slide, Typography } from "@mui/material";
 import Slider from "../components/Slider";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import theme from "../utils/theme";
+import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 
 export default function Home() {
   const [position, setPosition] = useState(0);
@@ -191,69 +192,115 @@ export default function Home() {
         >
           <Container maxWidth="xl">
             <Box sx={{ color: "#fff" }}>
-              <Typography variant="h5" fontWeight={700}>
+              <Typography variant="h5" fontWeight={700} mb={2}>
                 KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI
               </Typography>
-              <div class="container">
-                <div class="blkh">
-                  <div class="hand">
-                    <img
-                      class="img-fluid"
-                      src="https://cdn.pancake.vn/1/s240x240/fwebp/3e/fe/96/b3/d7501da0d2bf5258b467f9257921c4d31d78f11b1c5e18383f504222.jpg"
-                      alt=""
-                    />
-                    <p>
-                      Tiền nào của nấy, rất ngại mua đồ chợ, mua sản phẩm của
-                      Citi Mode rồi thấy rất ưng và yên tâm!
-                    </p>
-                    <strong>Kim Nguyên</strong>
-                  </div>
-                  <div class="hand">
-                    <img
-                      class="img-fluid"
-                      src="https://cdn.pancake.vn/1/s240x240/fwebp/99/77/4e/23/335968d36937efc117420e80a1ea9b288be0e26df7641ee03feebed1.jpg"
-                      alt=""
-                    />
-                    <p>
-                      Citi Mode giao hàng rất nhanh mà đảm bảo. Hãng uy tín,
-                      mình mua nhiều lần rồi nên rất yên tâm chuyển khoản trước!
-                    </p>
-                    <strong>Dương Thúy</strong>
-                  </div>
-                  <div class="hand">
-                    <img
-                      class="img-fluid"
-                      src="https://cdn.pancake.vn/1/s240x240/fwebp/6a/d9/d8/f0/a4f3ae039380c5c3c9b13f78306aed9ae58b4bd8e4fa08768509d708.jpg"
-                      alt=""
-                    />
-                    <p>
-                      Mặc đầm của Citi Mode rất hợp, có bộ sưu tập mới ra là lại
-                      sốt xình sịch!
-                    </p>
-                    <strong>Tạ Thị Hiệp</strong>
-                  </div>
-                  <div class="hand">
-                    <img
-                      class="img-fluid"
-                      src="https://vapa.vn/wp-content/uploads/2022/12/anh-3d-thien-nhien-002.jpg"
-                      alt=""
-                    />
-                    <p>sản phẩm đẹp và đăng mua nha mn</p>
-                    <strong>Tạ Thị Hiệp</strong>
-                  </div>
-                  <div class="hand">
-                    <img
-                      class="img-fluid"
-                      src="data:image/jpeg;base64,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"
-                      alt=""
-                    />
-                    <p>
-                      Mình đã mua và rất ưng với chất liệu ,kiểu dáng sản phẩm
-                    </p>
-                    <strong>Nguyễn Thị Mai</strong>
-                  </div>
-                </div>
-              </div>
+              <Splide
+                aria-label="Reviews"
+                options={{
+                  type: "loop",
+                  arrows: false,
+                  autoScroll: {
+                    speed: 2,
+                  },
+                  perPage: 3,
+                  pagination: false,
+                  autoplay: true,
+                  interval: 1000,
+                }}
+              >
+                <SplideSlide>
+                  <Box sx={{ textAlign: "center" }}>
+                    <div class="hand">
+                      <img
+                        class="img-fluid"
+                        src="https://www.paratime.vn/wp-content/uploads/2019/09/timestudio.vn-headshot-eye-glasses-02.jpg"
+                        alt=""
+                      />
+                      <p>Sản phẩm đáng tiền, đã mua lần thứ 3!</p>
+                      <strong>Nguyễn Minh Anh</strong>
+                    </div>
+                  </Box>
+                </SplideSlide>
+                <SplideSlide>
+                  <Box sx={{ textAlign: "center" }}>
+                    <div class="hand">
+                      <img
+                        class="img-fluid"
+                        src="https://cdn.pancake.vn/1/s240x240/fwebp/3e/fe/96/b3/d7501da0d2bf5258b467f9257921c4d31d78f11b1c5e18383f504222.jpg"
+                        alt=""
+                      />
+                      <p>
+                        Tiền nào của nấy, rất ngại mua đồ chợ, mua sản phẩm của
+                        Citi Mode rồi thấy rất ưng và yên tâm!
+                      </p>
+                      <strong>Kim Nguyên</strong>
+                    </div>
+                  </Box>
+                </SplideSlide>
+                <SplideSlide>
+                  <Box sx={{ textAlign: "center" }}>
+                    <div class="hand">
+                      <img
+                        class="img-fluid"
+                        src="https://cdn.pancake.vn/1/s240x240/fwebp/99/77/4e/23/335968d36937efc117420e80a1ea9b288be0e26df7641ee03feebed1.jpg"
+                        alt=""
+                      />
+                      <p>
+                        Citi Mode giao hàng rất nhanh mà đảm bảo. Hãng uy tín,
+                        mình mua nhiều lần rồi nên rất yên tâm chuyển khoản
+                        trước!
+                      </p>
+                      <strong>Dương Thúy</strong>
+                    </div>
+                  </Box>
+                </SplideSlide>
+
+                <SplideSlide>
+                  <Box sx={{ textAlign: "center" }}>
+                    <div class="hand">
+                      <img
+                        class="img-fluid"
+                        src="https://cdn.pancake.vn/1/s240x240/fwebp/6a/d9/d8/f0/a4f3ae039380c5c3c9b13f78306aed9ae58b4bd8e4fa08768509d708.jpg"
+                        alt=""
+                      />
+                      <p>
+                        Mặc đầm của Citi Mode rất hợp, có bộ sưu tập mới ra là
+                        lại sốt xình sịch!
+                      </p>
+                      <strong>Nguyễn Xuân Mai</strong>
+                    </div>
+                  </Box>
+                </SplideSlide>
+                <SplideSlide>
+                  <Box sx={{ textAlign: "center" }}>
+                    <div class="hand">
+                      <img
+                        class="img-fluid"
+                        src="https://vapa.vn/wp-content/uploads/2022/12/anh-3d-thien-nhien-002.jpg"
+                        alt=""
+                      />
+                      <p>sản phẩm đẹp và đăng mua nha mn</p>
+                      <strong>Tạ Thị Hiệp</strong>
+                    </div>
+                  </Box>
+                </SplideSlide>
+                <SplideSlide>
+                  <Box sx={{ textAlign: "center" }}>
+                    <div class="hand">
+                      <img
+                        class="img-fluid"
+                        src="https://content.pancake.vn/1/s800x800/fwebp/67/e4/54/ce/8b90d9516467c674811b24968f3da97d0b7f84f3b033e247e8401a40.png"
+                        alt=""
+                      />
+                      <p>
+                        Mình đã mua và rất ưng với chất liệu ,kiểu dáng sản phẩm
+                      </p>
+                      <strong>Nguyễn Thị Mai</strong>
+                    </div>
+                  </Box>
+                </SplideSlide>
+              </Splide>
             </Box>
           </Container>
         </Box>
