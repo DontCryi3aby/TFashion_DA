@@ -43,7 +43,7 @@ export default function AdminSidebar() {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <Link to="/admin/productall">
+          <Link to="/admin/products">
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <ReceiptLongIcon />
@@ -51,7 +51,7 @@ export default function AdminSidebar() {
               <ListItemText primary="Xem danh sách sản phẩm" />
             </ListItemButton>
           </Link>
-          <Link to="/admin/product">
+          <Link to="/admin/products/add">
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <AddBoxOutlinedIcon />
@@ -69,7 +69,7 @@ export default function AdminSidebar() {
           </Link>
         </List>
       </Collapse>
-      <Link to="/dondathang">
+      <Link to="/admin/orders">
         <ListItemButton>
           <ListItemIcon>
             <CalendarMonthOutlinedIcon />
@@ -77,12 +77,20 @@ export default function AdminSidebar() {
           <ListItemText primary="Danh sách đơn hàng" />
         </ListItemButton>
       </Link>
-      <Link to="/thongtinkhachhang">
+      <Link to="/admin/customers">
         <ListItemButton>
           <ListItemIcon>
             <GroupOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Thông tin khách hàng" />
+        </ListItemButton>
+      </Link>
+      <Link to="/admin/products/:id/edit">
+        <ListItemButton>
+          <ListItemIcon>
+            <GroupOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sửa sản phẩm" />
         </ListItemButton>
       </Link>
     </List>

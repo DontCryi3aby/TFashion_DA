@@ -134,10 +134,14 @@ export default function Detail() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log({ id });
       const response = await axios.get(
         `${process.env.REACT_APP_BASEURL}/api/detail/${id}`
       );
+      console.log("end fetch", response);
       setdetail(response.data);
+
+      console.log("detail: ", response.data);
     };
 
     fetchData();

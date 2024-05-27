@@ -10,7 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "./Avatar";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
@@ -40,9 +40,11 @@ function Header() {
   const userData = localStorage.getItem("userData");
   const user = userData ? JSON.parse(userData).user : null;
   const userId = user ? user.id : null;
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("userData");
+    navigate("/login");
   };
 
   const [cartCount, setCartCount] = useState(0);

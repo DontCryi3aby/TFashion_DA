@@ -29,6 +29,7 @@ import Kiemtradon from "./giaodien/Kiemtradon";
 import ProductAll from "./admin/ProductAll";
 import Dashboard from "./admin/Dashboard";
 import Slider from "./components/Slider";
+import UpdateProduct from "./admin/UpdateProduct";
 
 function App() {
   return (
@@ -38,10 +39,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<Dashboard />} />
-          <Route path="/dondathang" element={<Dondathang />} />
+          <Route path="/admin/orders" element={<Dondathang />} />
           <Route path="/admin/product/detail" element={<Detail_product />} />
-          <Route path="/admin/product" element={<Product />} />
-          <Route path="/admin/productall" element={<ProductAll />} />
+          <Route path="/admin/products/add" element={<Product />} />
+          <Route path="/admin/products/:id/edit" element={<UpdateProduct />} />
+          <Route path="/admin/products" element={<ProductAll />} />
+          <Route path="/admin/customers" element={<Thongtinkh />} />
           <Route path="/admin/login" element={<Dangnhapadmin />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/Thanhtoan" element={<Thanhtoan />} />
@@ -60,7 +63,6 @@ function App() {
 
           <Route path="/nbvanvddx" element={<Nbvanvddx />} />
           <Route path="/hrctddhmn" element={<Hrctddhmn />} />
-          <Route path="/thongtinkhachhang" element={<Thongtinkh />} />
 
           <Route path="/login" element={<Dn />} />
           <Route path="/register" element={<Dk />} />

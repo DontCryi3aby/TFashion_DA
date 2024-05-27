@@ -16,6 +16,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -44,6 +45,8 @@ export default function ProductAll() {
   const [category_id, setcategory_id] = useState("");
   const [productList, setproductList] = useState([]);
   const [danhmuc, setdanhmuc] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -174,6 +177,9 @@ export default function ProductAll() {
                                 color: "#4caf50",
                               },
                             }}
+                            onClick={() =>
+                              navigate(`/admin/products/${product.id}/edit`)
+                            }
                           >
                             <ModeEditIcon fontSize="small" />
                           </IconButton>

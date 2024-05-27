@@ -162,7 +162,7 @@ export default function Thanhtoan() {
             console.log(response2.data.message);
             // Display success message to the user
           } catch (error) {
-            alert("Có lỗi xảy ra khi đặt hàng");
+            alert("Có lỗi xảy ra send mail", error.message);
           }
 
           // Cập nhật giao diện người dùng để xóa sản phẩm khỏi giỏ hàng

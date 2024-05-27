@@ -55,16 +55,18 @@ export default function Product() {
         formData,
         {
           headers: {
-            "content-type": "multipart/form-data",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
+
+      console.log("data", response);
       alert("Product added successfully");
       sethinhanh("");
       settitle("");
       setgia("");
       setcategory_id("");
-      window.location.reload();
+      // window.location.reload();
 
       // Di chuyển file hình ảnh vào thư mục public/upload
     } catch (err) {
