@@ -85,14 +85,6 @@ export default function AdminSidebar() {
           <ListItemText primary="Thông tin khách hàng" />
         </ListItemButton>
       </Link>
-      <Link to="/admin/products/:id/edit">
-        <ListItemButton>
-          <ListItemIcon>
-            <GroupOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sửa sản phẩm" />
-        </ListItemButton>
-      </Link>
     </List>
   );
 }

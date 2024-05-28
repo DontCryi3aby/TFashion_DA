@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 import { AdminHeader } from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 
-export default function Product() {
+export default function AddProduct() {
   const [hinhanh, sethinhanh] = useState("");
   const [title, settitle] = useState("");
   const [gia, setgia] = useState("");

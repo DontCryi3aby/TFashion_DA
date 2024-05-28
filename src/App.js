@@ -7,7 +7,7 @@ import Dangnhapadmin from "./admin/Dangnhapadmin";
 import Dk from "./giaodien/Dangki";
 import Dn from "./giaodien/Dangnhap";
 
-import Product from "./admin/Product";
+import AddProduct from "./admin/AddProduct";
 import Detail_product from "./admin/Detail_product";
 import { Cart } from "./giaodien/Cart";
 import Thanhtoan from "./giaodien/Thanhtoan";
@@ -28,7 +28,6 @@ import Checkout from "./giaodien/Checkout";
 import Kiemtradon from "./giaodien/Kiemtradon";
 import ProductAll from "./admin/ProductAll";
 import Dashboard from "./admin/Dashboard";
-import Slider from "./components/Slider";
 import UpdateProduct from "./admin/UpdateProduct";
 
 function App() {
@@ -41,7 +40,7 @@ function App() {
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/orders" element={<Dondathang />} />
           <Route path="/admin/product/detail" element={<Detail_product />} />
-          <Route path="/admin/products/add" element={<Product />} />
+          <Route path="/admin/products/add" element={<AddProduct />} />
           <Route path="/admin/products/:id/edit" element={<UpdateProduct />} />
           <Route path="/admin/products" element={<ProductAll />} />
           <Route path="/admin/customers" element={<Thongtinkh />} />
