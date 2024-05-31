@@ -1,9 +1,40 @@
-import { Grid } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { Box, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { styled } from "@mui/material/styles";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { AdminHeader } from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
+import dayjs from "dayjs";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 export default function Dondathang() {
   const [dh, setDh] = useState([]);
@@ -11,6 +42,8 @@ export default function Dondathang() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log({ dh });
 
   const fetchData = async () => {
     try {
@@ -63,58 +96,112 @@ export default function Dondathang() {
           <AdminSidebar />
         </Grid>
         <Grid item xs={19}>
-          <div className="custom-margin-top">
-            <h2>Danh sách đơn hàng đã đặt</h2>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">Họ tên</th>
-                  <th scope="col">Địa chỉ</th>
-                  <th scope="col">Tỉnh</th>
-                  <th scope="col">Quận huyện</th>
-                  <th scope="col">Phường xã</th>
-                  <th scope="col">Số điện thoại kh</th>
-                  <th scope="col">Thông tin bổ sung</th>
-                  <th scope="col">Thời gian đặt hàng</th>
-                  <th scope="col">Phương thức thanh toán</th>
-                  <th scope="col">Tình trạng đơn hàng</th>
-                  <th scope="col">Xóa</th>
-                </tr>
-              </thead>
-              <tbody>
-                {dh.map((donhang) => (
-                  <tr key={donhang.id}>
-                    <td>{donhang.id}</td>
-                    <td>{donhang.hovaten}</td>
-                    <td>{donhang.diachi}</td>
-                    <td>{donhang.tinh}</td>
-                    <td>{donhang.quanhuyen}</td>
-                    <td>{donhang.phuongxa}</td>
-                    <td>{donhang.sdt}</td>
-                    <td>{donhang.thongtinbosung}</td>
-                    <td>{donhang.created_at}</td>
-                    <td>{donhang.pttt}</td>
-                    <td>
-                      <select
-                        value={donhang.tinhtrangdon}
-                        onChange={(e) => handleSelectChange(e, donhang.id)}
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="center">ID</StyledTableCell>
+                  <StyledTableCell align="center">Người đặt</StyledTableCell>
+                  <StyledTableCell align="center">Sản phẩm đặt</StyledTableCell>
+                  <StyledTableCell align="center">
+                    Số điện thoại
+                  </StyledTableCell>
+                  <StyledTableCell align="center">Địa chỉ</StyledTableCell>
+                  <StyledTableCell align="center">
+                    Thời gian đặt hàng
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    Phương thức thanh toán
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    Tình trạng đơn hàng
+                  </StyledTableCell>
+                  <StyledTableCell align="center">Chỉnh sửa</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {dh.map((d, index) => (
+                  <StyledTableRow key={index}>
+                    <StyledTableCell component="th" scope="row">
+                      <Typography align="center">{d.id}</Typography>
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: 2,
+                        }}
                       >
-                        <option value="cho-duyet">Chờ duyệt</option>
-                        <option value="dang-giao-hang">Đang giao hàng</option>
-                        <option value="da-giao">Đã giao</option>
-                      </select>
-                    </td>
-                    <td>
-                      <button onClick={() => handleDelete(donhang.id)}>
-                        <FaTrashAlt />
-                      </button>
-                    </td>
-                  </tr>
+                        <Box flex={1}>
+                          <Typography
+                            sx={{
+                              cursor: "pointer",
+                              "&:hover": {
+                                color: "red",
+                              },
+                            }}
+                            onClick={() => {}}
+                          >
+                            {d.hovaten}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {d.sanpham}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">0{d.sdt}</StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Typography align="center">
+                        {`${d.diachi}, ${d.phuongxa}, ${d.quanhuyen}, ${d.tinh}`}
+                      </Typography>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Typography align="center">
+                        {dayjs(d.created_at).format("h:mm A DD/MM/YYYY")}
+                      </Typography>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Typography align="center">{d.pttt}</Typography>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Typography align="center">{d.tinhtrangdon}</Typography>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Box>
+                        <Tooltip title="Edit item parameters">
+                          <IconButton
+                            sx={{
+                              "&:hover": {
+                                color: "#4caf50",
+                              },
+                            }}
+                            onClick={() => {}}
+                          >
+                            <ModeEditIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Remove item">
+                          <IconButton
+                            sx={{
+                              "&:hover": {
+                                color: "#ff5722",
+                              },
+                            }}
+                            onClick={() => handleDelete(d.id)}
+                          >
+                            <ClearIcon fontSize="small" />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                    </StyledTableCell>
+                  </StyledTableRow>
                 ))}
-              </tbody>
-            </table>
-          </div>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Grid>
       </Grid>
     </>

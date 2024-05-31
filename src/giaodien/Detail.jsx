@@ -154,7 +154,7 @@ export default function Detail() {
   }, [detail]);
 
   useEffect(() => {
-    const tongValue = slsp * calculateParent(detailgia) * 1000;
+    const tongValue = slsp * calculateParent(detailgia);
     setdetailtong(tongValue);
   }, [slsp, detailgia]);
 
@@ -281,7 +281,7 @@ export default function Detail() {
                   {new Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
-                  }).format(detail.product.gia * 1000)}
+                  }).format(detail.product.gia)}
                 </Typography>
                 <Typography
                   variant="h5"
@@ -290,7 +290,7 @@ export default function Detail() {
                   {new Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
-                  }).format(detail.product.gia * 1000 + 30000)}
+                  }).format(detail.product.gia * 1 + 30000)}
                 </Typography>
               </Box>
               <Box mt={1}>

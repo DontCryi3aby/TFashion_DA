@@ -17,9 +17,14 @@ import { Link } from "react-router-dom";
 
 export default function AdminSidebar() {
   const [open, setOpen] = React.useState(true);
+  const [openCategoryList, setOpenCategoryList] = React.useState(true);
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const handleCategoryClick = () => {
+    setOpenCategoryList(!openCategoryList);
   };
 
   return (
@@ -59,12 +64,23 @@ export default function AdminSidebar() {
               <ListItemText primary="Thêm sản phẩm mới" />
             </ListItemButton>
           </Link>
-          <Link to="/admin/product/detail">
+        </List>
+      </Collapse>
+      <ListItemButton onClick={handleCategoryClick}>
+        <ListItemIcon>
+          <ReceiptLongOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý danh mục" />
+        {openCategoryList ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={openCategoryList} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <Link to="/admin/categories">
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
-                <AddToPhotosOutlinedIcon />
+                <ReceiptLongIcon />
               </ListItemIcon>
-              <ListItemText primary="Thêm chi tiết sản phẩm" />
+              <ListItemText primary="Xem danh sách danh mục" />
             </ListItemButton>
           </Link>
         </List>
@@ -82,7 +98,7 @@ export default function AdminSidebar() {
           <ListItemIcon>
             <GroupOutlinedIcon />
           </ListItemIcon>
-          <ListItemText primary="Thông tin khách hàng" />
+          <ListItemText primary="Danh sách khách hàng" />
         </ListItemButton>
       </Link>
     </List>

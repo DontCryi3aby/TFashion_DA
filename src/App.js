@@ -7,8 +7,8 @@ import Dangnhapadmin from "./admin/Dangnhapadmin";
 import Dk from "./giaodien/Dangki";
 import Dn from "./giaodien/Dangnhap";
 
-import AddProduct from "./admin/AddProduct";
-import Detail_product from "./admin/Detail_product";
+// import AddProduct from "./admin/Product/AddProduct";
+import Detail_product from "./admin/Product/Detail_product";
 import { Cart } from "./giaodien/Cart";
 import Thanhtoan from "./giaodien/Thanhtoan";
 import Sominu from "./giaodien/Sominu";
@@ -26,9 +26,13 @@ import Cdcvbc from "./giaodien/thegioicuaphaidep/Cdcvbc";
 import Nbvanvddx from "./giaodien/thegioicuaphaidep/Nbvanvddx";
 import Checkout from "./giaodien/Checkout";
 import Kiemtradon from "./giaodien/Kiemtradon";
-import ProductAll from "./admin/ProductAll";
+import ProductAll from "./admin/Product/ProductAll";
 import Dashboard from "./admin/Dashboard";
-import UpdateProduct from "./admin/UpdateProduct";
+import UpdateProduct from "./admin/Product/UpdateProduct";
+import UserProfile from "./giaodien/User/UserProfile";
+import ProductDetail from "./admin/Product/ProductDetail";
+import AddProduct from "./admin/Product/AddProduct2";
+import Category from "./admin/Category";
 
 function App() {
   return (
@@ -42,9 +46,12 @@ function App() {
           <Route path="/admin/product/detail" element={<Detail_product />} />
           <Route path="/admin/products/add" element={<AddProduct />} />
           <Route path="/admin/products/:id/edit" element={<UpdateProduct />} />
+          <Route path="/admin/products/:id" element={<ProductDetail />} />
           <Route path="/admin/products" element={<ProductAll />} />
           <Route path="/admin/customers" element={<Thongtinkh />} />
           <Route path="/admin/login" element={<Dangnhapadmin />} />
+          <Route path="/admin/categories" element={<Category />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/Thanhtoan" element={<Thanhtoan />} />
           <Route path="/kiemtradon" element={<Kiemtradon />} />
@@ -67,6 +74,7 @@ function App() {
           <Route path="/register" element={<Dk />} />
 
           <Route path="/Detail/:title/:id" element={<Detail />} />
+          <Route path="/users/:id" element={<UserProfile />} />
         </Routes>
       </Router>
     </div>

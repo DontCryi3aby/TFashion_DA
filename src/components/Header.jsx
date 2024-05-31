@@ -17,6 +17,7 @@ import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import Badge from "@mui/material/Badge";
 import { Settings } from "@mui/icons-material";
 import Logo from "./Logo";
+import AvatarUser from "./AvatarUser";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -44,7 +45,6 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("userData");
-    navigate("/login");
   };
 
   const [cartCount, setCartCount] = useState(0);
@@ -68,7 +68,7 @@ function Header() {
   const settings = [
     {
       label: "Thông tin cá nhân",
-      link: "#",
+      link: `/users/${userId}`,
       icon: <PermIdentityOutlinedIcon fontSize="small" />,
     },
     { label: "Cài đặt", link: "#", icon: <Settings fontSize="small" /> },
@@ -139,49 +139,64 @@ function Header() {
 
           {user ? (
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <Link to={setting.link} key={setting.label}>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Button startIcon={setting?.icon} size="small">
-                          <Typography sx={{ ml: 1 }}>
-                            {setting.label}
-                          </Typography>
-                        </Button>
-                      </MenuItem>
-                    </Link>
-                  ))}
-                </Menu>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      {user.avatar ? (
+                        <AvatarUser
+                          img={`${process.env.REACT_APP_BASEURL}/storage/${user.avatar}`}
+                        />
+                      ) : (
+                        <Avatar />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <Link to={setting.link} key={setting.label}>
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          <Button startIcon={setting?.icon} size="small">
+                            <Typography sx={{ ml: 1 }}>
+                              {setting.label}
+                            </Typography>
+                          </Button>
+                        </MenuItem>
+                      </Link>
+                    ))}
+                  </Menu>
+                </Box>
+                <Box>
+                  <Typography align="left">{user.name}</Typography>
+                  <Typography variant="body2" align="left">
+                    {user.email}
+                  </Typography>
+                </Box>
               </Box>
               <Link>
-                <Button
+                <Link
+                  to="/login"
                   variant="contained"
                   sx={{ color: "#fff" }}
                   onClick={handleLogout}
                 >
-                  Đăng xuất
-                </Button>
+                  <Button variant="contained">Đăng xuất</Button>
+                </Link>
               </Link>
             </Box>
           ) : (

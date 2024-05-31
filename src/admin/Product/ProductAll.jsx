@@ -2,9 +2,8 @@ import axios from "axios";
 import { default as React, useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
-import { AdminHeader } from "./AdminHeader";
-import AdminSidebar from "./AdminSidebar";
-
+import { AdminHeader } from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 import ClearIcon from "@mui/icons-material/Clear";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
@@ -39,10 +38,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ProductAll() {
-  const [hinhanh, sethinhanh] = useState("");
-  const [title, settitle] = useState("");
-  const [gia, setgia] = useState("");
-  const [category_id, setcategory_id] = useState("");
   const [productList, setproductList] = useState([]);
   const [danhmuc, setdanhmuc] = useState([]);
 
@@ -54,6 +49,7 @@ export default function ProductAll() {
       .then((response) => {
         console.log(response.data);
         // Kiểm tra có trả về dữ liệu hay không
+        // console.log("list:", response.data);
         setproductList(response.data);
       })
       .catch((error) => {
@@ -77,36 +73,6 @@ export default function ProductAll() {
         alert("xóa sản phẩm thành công");
       });
   };
-
-  async function save(event) {
-    event.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("hinhanh", event.target.hinhanh.files[0]);
-      formData.append("title", title);
-      formData.append("gia", gia);
-      formData.append("category_id", category_id);
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASEURL}/api/add_product`,
-        formData,
-        {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        }
-      );
-      alert("Product added successfully");
-      sethinhanh("");
-      settitle("");
-      setgia("");
-      setcategory_id("");
-      window.location.reload();
-
-      // Di chuyển file hình ảnh vào thư mục public/upload
-    } catch (err) {
-      alert("Failed to add product");
-    }
-  }
 
   return (
     <>
@@ -150,7 +116,19 @@ export default function ProductAll() {
                           />
                         </Box>
                         <Box flex={1}>
-                          <Typography>{product.title}</Typography>
+                          <Typography
+                            sx={{
+                              cursor: "pointer",
+                              "&:hover": {
+                                color: "red",
+                              },
+                            }}
+                            onClick={() =>
+                              navigate(`/admin/products/${product.id}`)
+                            }
+                          >
+                            {product.title}
+                          </Typography>
                         </Box>
                       </Box>
                     </StyledTableCell>
@@ -160,13 +138,11 @@ export default function ProductAll() {
                         {new Intl.NumberFormat("vi-VN", {
                           style: "currency",
                           currency: "VND",
-                        }).format(product.gia * 1000)}
+                        }).format(product.gia)}
                       </b>
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      <Typography align="center">
-                        {product.category_id}
-                      </Typography>
+                      <Typography align="center">{product.category}</Typography>
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <Box>

@@ -2,8 +2,8 @@ import axios from "axios";
 import { default as React, useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
-import { AdminHeader } from "./AdminHeader";
-import AdminSidebar from "./AdminSidebar";
+import { AdminHeader } from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 
 export default function AddProduct() {
   const [hinhanh, sethinhanh] = useState("");
@@ -151,42 +151,6 @@ export default function AddProduct() {
                     Thêm Sản Phẩm
                   </button>
                 </form>
-
-                <h2>Danh sách sản phẩm</h2>
-
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Hình ảnh</th>
-                      <th scope="col">Tên sản phẩm</th>
-                      <th scope="col">Giá thành</th>
-                      <th scope="col">Danh mục</th>
-                      <th scope="col">Xóa</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {product.map((pro) => {
-                      return (
-                        <tr>
-                          <th scope="row">{pro.id}</th>
-                          <td>{pro.hinhanh}</td>
-                          <td>{pro.title}</td>
-                          <td>{pro.gia}</td>
-                          <td>{pro.category_id}</td>
-                          <td>
-                            <button
-                              onClick={() => xoasp(pro.id)}
-                              class="btn btn-danger"
-                            >
-                              <i class="fas fa-trash-alt"></i>
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>

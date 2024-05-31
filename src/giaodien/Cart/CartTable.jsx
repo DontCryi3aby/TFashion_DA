@@ -96,7 +96,7 @@ function CartTable({ productList }) {
                   {new Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
-                  }).format(product.gia * 1000)}
+                  }).format(product.gia)}
                 </b>
               </StyledTableCell>
               <StyledTableCell align="center">

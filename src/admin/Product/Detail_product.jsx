@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
-import { AdminHeader } from "./AdminHeader";
-import AdminSidebar from "./AdminSidebar";
+import { AdminHeader } from "../AdminHeader";
+import AdminSidebar from "../AdminSidebar";
 import { useNavigate } from "react-router-dom";
+
 export default function Detail_product() {
   const adminData = localStorage.getItem("adminData");
   const admin = adminData ? JSON.parse(adminData).user : null;
