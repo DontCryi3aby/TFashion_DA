@@ -69,7 +69,7 @@ export default function Dangki() {
           sx={{ display: "flex", alignItems: "center", gap: 3 }}
         >
           <Paper sx={{ p: 5, flex: 1, minHeight: 630 }}>
-            <Typography variant="h4">Register Form</Typography>
+            <Typography variant="h4">Đăng ký</Typography>
             <Box my={2}>
               <Box
                 className="login__social"
@@ -91,7 +91,7 @@ export default function Dangki() {
               >
                 <GoogleIcon fontSize="small" />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Continue with Google
+                  Đăng nhập với Google
                 </Typography>
               </Box>
               <Box
@@ -114,7 +114,7 @@ export default function Dangki() {
               >
                 <FacebookIcon fontSize="small" />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Continue with Facebook
+                  Đăng nhập với Facebook
                 </Typography>
               </Box>
               <Box
@@ -137,7 +137,7 @@ export default function Dangki() {
               >
                 <AppleIcon fontSize="small" />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Continue with Apple
+                  Đăng nhập với Apple
                 </Typography>
               </Box>
             </Box>
@@ -213,13 +213,13 @@ export default function Dangki() {
                 size="large"
                 onClick={handleSignupSubmit}
               >
-                Sign up
+                Đăng ký
               </Button>
             </Stack>
 
             <Typography variant="body2" sx={{ mt: 1 }}>
-              By continuing with Google, Apple, or Email, you agree to
-              TFashion’s Terms of Service and Privacy Policy.
+              Bằng cách tiếp tục với Google, Apple hoặc Email, bạn đồng ý với
+              Điều khoản dịch vụ và Chính sách quyền riêng tư của TFashion.
             </Typography>
             <Divider sx={{ pt: 2 }} />
 
@@ -233,14 +233,14 @@ export default function Dangki() {
                 justifyContent: "center",
               }}
             >
-              Already signed up?
+              Đã có tài khoản?
               <Link to="/login">
                 <Typography
                   variant="body2"
                   sx={{ textDecoration: "underline", cursor: "pointer" }}
                   onClick={() => {}}
                 >
-                  Go to login
+                  Đăng nhập
                 </Typography>
               </Link>
             </Typography>

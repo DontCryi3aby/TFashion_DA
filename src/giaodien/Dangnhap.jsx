@@ -19,12 +19,90 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom/dist";
+import { useGoogleLogin } from "@react-oauth/google";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function Dangnhap() {
   const userData = localStorage.getItem("userData");
   const user = userData ? JSON.parse(userData).user : null;
   const userId = user ? user.id : null;
   const navigate = useNavigate();
+
+  const loginGoogle = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        // Login google
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          }
+        );
+        console.log({ res });
+
+        // handle login
+        const loginResponse = await axios.post(
+          `${process.env.REACT_APP_BASEURL}/api/login`,
+          {
+            email: res.data.email,
+            name: res.data.name,
+            avatar: res.data.picture,
+            is_google_login: true,
+          }
+        );
+        if (loginResponse.status === 200) {
+          const { token, user } = loginResponse.data;
+
+          const userData = { token, user }; // Tạo đối tượng chứa thông tin người dùng
+          const userDataJSON = JSON.stringify(userData); // Chuyển đối tượng thành chuỗi JSON
+
+          localStorage.setItem("userData", userDataJSON); // Lưu chuỗi JSON vào localStorage
+          navigate("/");
+        } else {
+          alert("Login failed");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
+  const loginFacebook = async () => {
+    console.log("login facebook");
+    try {
+      //login facebook
+      const provider = new FacebookAuthProvider();
+      const res = await signInWithPopup(auth, provider);
+      console.log("res", res.user);
+
+      // Handle login
+      const loginResponse = await axios.post(
+        `${process.env.REACT_APP_BASEURL}/api/login`,
+        {
+          email: res.user.email,
+          name: res.user.displayName,
+          avatar: res.user.photoURL,
+          is_facebook_login: true,
+        }
+      );
+      if (loginResponse.status === 200) {
+        const { token, user } = loginResponse.data;
+
+        const userData = { token, user }; // Tạo đối tượng chứa thông tin người dùng
+        const userDataJSON = JSON.stringify(userData); // Chuyển đối tượng thành chuỗi JSON
+
+        localStorage.setItem("userData", userDataJSON); // Lưu chuỗi JSON vào localStorage
+        navigate("/");
+      } else {
+        alert("Login failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const [isloginForm, setIsLoginForm] = useState(true);
 
@@ -51,7 +129,6 @@ export default function Dangnhap() {
         const userDataJSON = JSON.stringify(userData); // Chuyển đối tượng thành chuỗi JSON
 
         localStorage.setItem("userData", userDataJSON); // Lưu chuỗi JSON vào localStorage
-        alert("Login successful");
         navigate("/");
       } else {
         alert("Login failed");
@@ -83,7 +160,7 @@ export default function Dangnhap() {
         >
           <Paper sx={{ p: 5, flex: 1, minHeight: 630 }}>
             <Typography variant="h4">
-              {isloginForm ? "Login Form" : "Register Form"}
+              {isloginForm ? "Đăng nhập" : "Đăng ký"}
             </Typography>
             <Box my={2}>
               <Box
@@ -103,10 +180,11 @@ export default function Dangnhap() {
                     background: "#f5f5f5",
                   },
                 }}
+                onClick={() => loginGoogle()}
               >
                 <GoogleIcon fontSize="small" />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Continue with Google
+                  Đăng nhập với Google
                 </Typography>
               </Box>
               <Box
@@ -126,10 +204,11 @@ export default function Dangnhap() {
                     background: "#f5f5f5",
                   },
                 }}
+                onClick={() => loginFacebook()}
               >
                 <FacebookIcon fontSize="small" />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Continue with Facebook
+                  Đăng nhập với Facebook
                 </Typography>
               </Box>
               <Box
@@ -152,7 +231,7 @@ export default function Dangnhap() {
               >
                 <AppleIcon fontSize="small" />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Continue with Apple
+                  Đăng nhập với Apple
                 </Typography>
               </Box>
             </Box>
@@ -169,7 +248,7 @@ export default function Dangnhap() {
               <TextField
                 type={isShowPassword ? "text" : "password"}
                 name="password"
-                label="Password"
+                label="Mật khẩu"
                 fullWidth
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -209,7 +288,7 @@ export default function Dangnhap() {
                   size="large"
                   onClick={handleLoginSubmit}
                 >
-                  Log in
+                  Đăng nhập
                 </Button>
               ) : (
                 <Button
@@ -225,7 +304,7 @@ export default function Dangnhap() {
                   size="large"
                   onClick={handleSignupSubmit}
                 >
-                  Sign up with Email
+                  Đăng nhập với Email
                 </Button>
               )}
             </Stack>
@@ -234,13 +313,13 @@ export default function Dangnhap() {
                 variant="body2"
                 sx={{ textDecoration: "underline", mt: 1 }}
               >
-                Forgot your password?
+                Quên mật khẩu?
               </Typography>
             )}
 
             <Typography variant="body2" sx={{ mt: 1 }}>
-              By continuing with Google, Apple, or Email, you agree to
-              TFashion’s Terms of Service and Privacy Policy.
+              Bằng cách tiếp tục với Google, Apple hoặc Email, bạn đồng ý với
+              Điều khoản dịch vụ và Chính sách quyền riêng tư của TFashion.
             </Typography>
             <Divider sx={{ pt: 2 }} />
             {isloginForm ? (
@@ -254,7 +333,7 @@ export default function Dangnhap() {
                   justifyContent: "center",
                 }}
               >
-                Don’t have an account?
+                Bạn chưa có tài khoản?
                 <Link to="/register">
                   <Typography
                     variant="body2"
@@ -265,7 +344,7 @@ export default function Dangnhap() {
                       setIsLoginForm(false);
                     }}
                   >
-                    Sign up
+                    Đăng ký
                   </Typography>
                 </Link>
               </Typography>
@@ -280,7 +359,7 @@ export default function Dangnhap() {
                   justifyContent: "center",
                 }}
               >
-                Already signed up?
+                Đã có tài khoản?
                 <Typography
                   variant="body2"
                   sx={{ textDecoration: "underline", cursor: "pointer" }}
@@ -290,7 +369,7 @@ export default function Dangnhap() {
                     setIsLoginForm(true);
                   }}
                 >
-                  Go to login
+                  Đăng nhập
                 </Typography>
               </Typography>
             )}

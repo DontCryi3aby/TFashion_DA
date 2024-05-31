@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import img from "../../src/assets/images/avatar.jpg";
+import img from "../../src/assets/images/placeholder.png";
 
 function Avatar() {
   return (

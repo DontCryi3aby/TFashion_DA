@@ -7,14 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./utils/theme";
 import "@splidejs/react-splide/css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <App />
-  </ThemeProvider>
+  <GoogleOAuthProvider clientId="833227977117-ur9ql0l57hq9j3dn7ev2hgqsfksvoo4c.apps.googleusercontent.com">
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </GoogleOAuthProvider>
+
   // </React.StrictMode>
 );
 
