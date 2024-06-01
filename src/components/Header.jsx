@@ -18,6 +18,7 @@ import Badge from "@mui/material/Badge";
 import { Settings } from "@mui/icons-material";
 import Logo from "./Logo";
 import AvatarUser from "./AvatarUser";
+import Search from "./Search2";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -88,6 +89,7 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <Logo />
+          <Search />
           <Box
             sx={{
               display: "flex",

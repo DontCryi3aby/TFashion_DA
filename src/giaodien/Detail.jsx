@@ -491,7 +491,7 @@ export default function Detail() {
                   startIcon={<AddIcon />}
                   type="submit"
                 >
-                  Add to cart
+                  Thêm vào giỏ hàng
                 </Button>
               </Box>
             </Stack>

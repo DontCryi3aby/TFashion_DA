@@ -938,3 +938,13 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+.search-input {
+  border: none !important;
+  outline: none !important;
+}
+
+.product-detail-item:hover p {
+  color: red !important;
+  display: block;
+}

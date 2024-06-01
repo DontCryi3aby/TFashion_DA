@@ -94,7 +94,12 @@ export default function Home() {
                       >
                         {vdcs.title}
                       </Typography>
-                      <Typography sx={{ mt: 1 }}>{vdcs.gia}</Typography>
+                      <Typography sx={{ mt: 1 }}>
+                        {new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(vdcs.gia)}
+                      </Typography>
                     </Box>
                   </Link>
                 );
@@ -120,6 +125,7 @@ export default function Home() {
                   <Link
                     to={`/Detail/${sominu.title}/${sominu.id}`}
                     key={sominu.id}
+                    className="product-detail-item"
                   >
                     <Box className="vay1" sx={{ color: "#fff", mt: 1 }}>
                       <img
@@ -138,7 +144,12 @@ export default function Home() {
                       >
                         {sominu.title}
                       </Typography>
-                      <Typography sx={{ mt: 1 }}>{sominu.gia}</Typography>
+                      <Typography sx={{ mt: 1 }}>
+                        {new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(sominu.gia)}
+                      </Typography>
                     </Box>
                   </Link>
                 );
@@ -175,7 +186,12 @@ export default function Home() {
                       >
                         {chanvay.title}
                       </Typography>
-                      <Typography sx={{ mt: 1 }}>{chanvay.gia}</Typography>
+                      <Typography sx={{ mt: 1 }}>
+                        {new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(chanvay.gia)}
+                      </Typography>
                     </Box>
                   </Link>
                 );

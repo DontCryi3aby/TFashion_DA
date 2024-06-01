@@ -33,6 +33,7 @@ import UserProfile from "./giaodien/User/UserProfile";
 import ProductDetail from "./admin/Product/ProductDetail";
 import AddProduct from "./admin/Product/AddProduct2";
 import Category from "./admin/Category";
+import Products from "./giaodien/Products";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
           <Route path="/category/sandouudai" element={<Sandouudai />} />
           <Route path="/category/xahang" element={<Xahang />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/products" element={<Products />} />
 
           <Route path="/cdcvbc" element={<Cdcvbc />} />
 
